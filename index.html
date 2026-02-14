@@ -2,49 +2,87 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Михаил и партнеры</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Михаил и партнеры | Креативное бюро</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:italic,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f8f8; color: #1a1a1a; font-family: sans-serif; }
+        html.lenis { height: auto; }
+        .lenis-smooth { scroll-behavior: auto !important; }
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #fff; overflow-x: hidden; }
         .serif { font-family: 'Playfair Display', serif; }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+        }
+        .glass-card:hover { border-color: rgba(255, 255, 255, 0.4); transform: translateY(-10px); }
+        .hero-title { font-size: clamp(3rem, 10vw, 8rem); line-height: 0.85; letter-spacing: -0.04em; }
     </style>
 </head>
-<body class="p-10 md:p-20">
-    <nav class="flex justify-between uppercase text-[10px] tracking-widest mb-32">
-        <div>Михаил & Партнеры</div>
-        <div class="space-x-6">
-            <a href="#">Работы</a>
-            <a href="#">Контакт</a>
+<body>
+
+    <nav class="fixed w-full z-50 py-8 px-6 md:px-16 flex justify-between items-center bg-black/50 backdrop-blur-lg border-b border-white/5">
+        <div class="text-xl font-black uppercase tracking-tighter">Михаил <span class="serif italic font-normal text-gray-500">&</span> П.</div>
+        <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.3em] font-bold">
+            <a href="#services" class="hover:text-gray-400 transition">Услуги</a>
+            <a href="#about" class="hover:text-gray-400 transition">Бюро</a>
+            <a href="#contact" class="text-blue-500 hover:text-blue-400">Написать</a>
         </div>
     </nav>
-    <h1 class="serif text-7xl md:text-9xl leading-none mb-20">
-        Делаем <br> <span class="text-gray-300 italic">смелый</span> <br> дизайн.
-    </h1>
-    <p class="max-w-md text-xl text-gray-500 italic">Независимое бюро. Киев — 2026</p>
-    <div id="custom-cursor" class="fixed top-0 left-0 w-6 h-6 bg-black rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 ease-out hidden md:block"></div>
 
-<script>
-    const cursor = document.getElementById('custom-cursor');
-    
-    // Движение курсора
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
-    });
+    <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-32">
+        <div data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="serif hero-title mb-16">
+                Создаем <br> 
+                <span class="italic text-gray-600">будущее</span> <br> 
+                в цифре.
+            </h1>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-10" data-aos="fade-up" data-aos-delay="500">
+            <p class="max-w-md text-xl text-gray-400 leading-tight font-light">
+                Креативное бюро Михаила и партнеров. Полный цикл разработки: от концепта до запуска.
+            </p>
+            <div class="text-[10px] uppercase tracking-widest font-bold border-b-2 border-white pb-2 italic">Киев / 2026</div>
+        </div>
+    </section>
 
-    // Эффект при наведении на ссылки и кнопки
-    const links = document.querySelectorAll('a, button, .group');
-    links.forEach(link => {
-        link.addEventListener('mouseenter', () => {
-            cursor.style.transform += ' scale(3)';
-            cursor.style.backgroundColor = 'rgba(255,255,255,0.5)';
-        });
-        link.addEventListener('mouseleave', () => {
-            cursor.style.transform = cursor.style.transform.replace(' scale(3)', '');
-            cursor.style.backgroundColor = 'black';
-        });
-    });
-</script>
-</body>
-</html>
+    <section id="services" class="py-32 px-6 md:px-16 bg-[#050505]">
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col justify-between min-h-[500px]" data-aos="fade-up">
+                <div>
+                    <h3 class="text-4xl font-bold uppercase mb-4 tracking-tighter">Создание<br>сайтов</h3>
+                    <p class="text-gray-500 text-sm max-w-[250px]">Современные, адаптивные и быстрые веб-сайты под ключ.</p>
+                </div>
+                <div class="relative py-10 flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=600&auto=format&fit=crop" class="w-64 h-64 object-contain animate-pulse shadow-2xl rounded-full">
+                </div>
+            </div>
 
+            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col justify-between min-h-[500px]" data-aos="fade-up" data-aos-delay="200">
+                <div>
+                    <h3 class="text-4xl font-bold uppercase mb-4 tracking-tighter">Телеграм<br>приложения</h3>
+                    <p class="text-gray-500 text-sm max-w-[250px]">Разработка Mini Apps и сложных интеграций внутри Telegram.</p>
+                </div>
+                <div class="relative py-10 flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252728f?q=80&w=600&auto=format&fit=crop" class="w-64 h-64 object-contain opacity-80 shadow-2xl rounded-3xl">
+                </div>
+            </div>
+
+            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col justify-between min-h-[500px]" data-aos="fade-up">
+                <div>
+                    <h3 class="text-4xl font-bold uppercase mb-4 tracking-tighter">Создание приложений<br>Android и iOS</h3>
+                    <p class="text-gray-500 text-sm max-w-[250px]">Разработка нативных и кроссплатформенных мобильных решений.</p>
+                </div>
+                <div class="relative py-10 flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=600&auto=format&fit=crop" class="w-64 h-64 object-contain opacity-80 shadow-2xl rounded-3xl">
+                </div>
+            </div>
+
+            <div class="glass-card p-10 rounded-[2.5rem] flex flex-col justify-between min-h-[500px]" data-aos="fade-up" data-aos-delay="200">
+                <div>
+                    <h3 class="text-4xl font-bold uppercase mb-4 tracking-tighter">Создание ботов<br>для Telegram</h3>
+                    <p class="text-gray-500 text-sm max-w-[250px]">Умные чат-боты для автоматизации бизнеса
