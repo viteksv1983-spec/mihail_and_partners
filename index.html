@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Михаил и партнеры | Креативное бюро</title>
+    <title>Mikhail & Company | Creative Bureau</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
@@ -15,32 +15,31 @@
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
         .serif { font-family: 'Playfair Display', serif; }
         
-        /* --- Абстрактный фон (Бломб) --- */
+        /* Background Blob */
         .hero-blob {
             position: absolute;
             top: -20%; right: -10%;
             width: 80vw; height: 80vw;
             max-width: 800px; max-height: 800px;
             background: conic-gradient(from 90deg at 50% 50%, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
-            filter: blur(120px); opacity: 0.3;
+            filter: blur(120px); opacity: 0.25;
             border-radius: 40% 60% 50% 50% / 50% 50% 60% 40%;
             animation: blob-spin 25s linear infinite alternate;
             z-index: 0; mix-blend-mode: screen;
         }
         @keyframes blob-spin {
-            0% { transform: rotate(0deg) scale(1) translate(0, 0); border-radius: 40% 60% 50% 50% / 50% 50% 60% 40%; }
-            50% { transform: rotate(180deg) scale(1.1) translate(-5%, 5%); border-radius: 50% 50% 60% 40% / 40% 60% 50% 50%; }
-            100% { transform: rotate(360deg) scale(1) translate(0, 0); border-radius: 40% 60% 50% 50% / 50% 50% 60% 40%; }
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(1.1); }
         }
 
-        /* Полноэкранное меню */
+        /* Menu Overlay */
         #menu-overlay {
             clip-path: circle(0% at 95% 5%);
             transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
         #menu-overlay.active { clip-path: circle(150% at 95% 5%); }
 
-        /* Карточки и изображения */
+        /* Cards */
         .glass-card { 
             background: rgba(255, 255, 255, 0.01); 
             border: 1px solid rgba(255, 255, 255, 0.07); 
@@ -53,21 +52,14 @@
         }
         .glass-card:hover .card-image { transform: scale(1.03); }
 
-        /* Типографика и декор */
         .hero-title { font-size: clamp(3.5rem, 12vw, 10rem); line-height: 0.8; letter-spacing: -0.05em; }
-        .step-number { font-size: 8rem; opacity: 0.05; position: absolute; top: -2rem; left: -1rem; font-weight: 800; z-index: 0;}
-        .process-content { position: relative; z-index: 2; }
-
-        /* НОВЫЙ ЛОГОТИП СТИЛИ */
+        .step-number { font-size: 8rem; opacity: 0.05; position: absolute; top: -2rem; left: -1rem; font-weight: 800; }
+        
+        /* Logo Styles */
         .logo-box {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        .logo-group:hover .logo-box {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
         }
         .logo-ampersand {
              background: linear-gradient(135deg, #60a5fa, #a855f7);
@@ -80,19 +72,18 @@
 
     <nav class="fixed w-full z-[100] py-6 px-6 md:px-16 flex justify-between items-center bg-black/10 backdrop-blur-md border-b border-white/5">
         
-        <a href="#" class="flex items-center group logo-group">
-            <div class="logo-box w-11 h-11 flex justify-center items-center rounded-xl mr-4 overflow-hidden relative">
-                <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/30 to-purple-500/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md"></div>
+        <a href="#" class="flex items-center group">
+            <div class="logo-box w-11 h-11 flex justify-center items-center rounded-xl mr-4 relative">
                 <span class="serif italic text-2xl logo-ampersand relative z-10">&</span>
             </div>
-            <div class="flex flex-col leading-none justify-center">
-                <span class="font-black uppercase text-lg tracking-tighter text-white">Михаил</span>
-                <span class="text-[9px] uppercase tracking-[0.35em] text-gray-500 font-bold mt-1.5 group-hover:text-gray-300 transition-colors">Creative Bureau</span>
+            <div class="flex flex-col leading-none">
+                <span class="font-black uppercase text-lg tracking-tighter text-white">Mikhail</span>
+                <span class="text-[9px] uppercase tracking-[0.35em] text-gray-500 font-bold mt-1.5">And Company</span>
             </div>
         </a>
 
         <button id="menu-open" class="group flex items-center space-x-4 outline-none">
-            <span class="text-[10px] uppercase tracking-[0.4em] font-bold group-hover:text-gray-400 transition">Меню</span>
+            <span class="text-[10px] uppercase tracking-[0.4em] font-bold group-hover:text-gray-400 transition">Menu</span>
             <div class="space-y-1.5">
                 <div class="w-8 h-0.5 bg-white transition-all group-hover:w-6"></div>
                 <div class="w-8 h-0.5 bg-white transition-all group-hover:w-10"></div>
@@ -101,20 +92,20 @@
     </nav>
 
     <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center">
-        <button id="menu-close" class="absolute top-10 right-10 text-5xl font-light hover:rotate-90 transition-all duration-500">&times;</button>
+        <button id="menu-close" class="absolute top-10 right-10 text-5xl font-light">&times;</button>
         <div class="flex flex-col space-y-10 text-center">
-            <a href="#work" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Работы</a>
-            <a href="#process" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Процесс</a>
-            <a href="#contact" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Связь</a>
+            <a href="#work" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Works</a>
+            <a href="#process" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Process</a>
+            <a href="#contact" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Contact</a>
         </div>
     </div>
 
     <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 relative overflow-hidden">
         <div class="hero-blob"></div>
         <div class="relative z-10" data-aos="fade-up">
-            <h1 class="serif hero-title mb-12">Бутик <br> <span class="italic text-gray-400">цифровых</span> <br> решений.</h1>
+            <h1 class="serif hero-title mb-12">Digital <br> <span class="italic text-gray-400">solutions</span> <br> bureau.</h1>
             <p class="max-w-2xl text-xl md:text-2xl text-gray-500 font-light leading-snug">
-                Мы объединяем опыт Михаила и экспертизу его партнеров для создания продуктов, которые задают тренды на рынке СНГ и Европы.
+                We blend Mikhail’s vision with world-class expertise to build products that define market trends.
             </p>
         </div>
     </section>
@@ -122,31 +113,31 @@
     <section id="work" class="py-20 px-6 md:px-16 relative z-10 bg-[#050505]">
         <div class="grid md:grid-cols-2 gap-12">
             <div class="glass-card p-6 rounded-[2.5rem]" data-aos="fade-up">
-                <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="card-image mb-10" alt="Web">
+                <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="card-image mb-10">
                 <div class="px-4 pb-4">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">01 / Web Architecture</span>
-                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Создание сайтов</h3>
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">01 / Web Design</span>
+                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Web Development</h3>
                 </div>
             </div>
             <div class="glass-card p-6 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="200">
-                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="card-image mb-10" alt="Telegram">
+                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="card-image mb-10">
                 <div class="px-4 pb-4">
                     <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">02 / Ecosystem</span>
                     <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Telegram Mini Apps</h3>
                 </div>
             </div>
             <div class="glass-card p-6 rounded-[2.5rem]" data-aos="fade-up">
-                <img src="pawel-czerwinski-NJdfP9AlPjc-unsplash.jpg" class="card-image mb-10" alt="Mobile">
+                <img src="pawel-czerwinski-NJdfP9AlPjc-unsplash.jpg" class="card-image mb-10">
                 <div class="px-4 pb-4">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">03 / Mobile Experience</span>
-                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Android & iOS</h3>
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">03 / Experience</span>
+                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">iOS & Android</h3>
                 </div>
             </div>
             <div class="glass-card p-6 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="200">
-                <img src="shubham-dhage-O1rxducLjN0-unsplash.jpg" class="card-image mb-10" alt="Bots">
+                <img src="shubham-dhage-O1rxducLjN0-unsplash.jpg" class="card-image mb-10">
                 <div class="px-4 pb-4">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">04 / Automation</span>
-                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Умные боты</h3>
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">04 / Intelligence</span>
+                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Smart AI Bots</h3>
                 </div>
             </div>
         </div>
@@ -154,40 +145,49 @@
 
     <section id="process" class="py-40 px-6 md:px-16 bg-[#080808] relative z-10">
         <div class="mb-24" data-aos="fade">
-            <span class="text-xs uppercase tracking-[0.5em] text-gray-600">Наш метод</span>
-            <h2 class="serif text-5xl md:text-7xl italic mt-4">Как мы работаем</h2>
+            <span class="text-xs uppercase tracking-[0.5em] text-gray-600">How we work</span>
+            <h2 class="serif text-5xl md:text-7xl italic mt-4">Our Methodology</h2>
         </div>
         <div class="grid md:grid-cols-3 gap-16">
             <div class="relative group" data-aos="fade-up">
                 <span class="step-number">01</span>
-                <div class="process-content"><h4 class="serif italic text-3xl mb-6">Аналитика</h4><p class="text-gray-500 text-sm leading-relaxed">Изучаем ДНК вашего бренда и рынок. Находим точки роста и формируем уникальное торговое предложение.</p></div>
+                <div class="relative z-10">
+                    <h4 class="serif italic text-3xl mb-6">Strategy</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">We decode your brand’s DNA and the market to find unique growth opportunities.</p>
+                </div>
             </div>
             <div class="relative group" data-aos="fade-up" data-aos-delay="200">
                 <span class="step-number">02</span>
-                <div class="process-content"><h4 class="serif italic text-3xl mb-6">Дизайн</h4><p class="text-gray-500 text-sm leading-relaxed">Проектируем опыт, а не просто картинки. Создаем визуальные системы, которые работают на вашу прибыль.</p></div>
+                <div class="relative z-10">
+                    <h4 class="serif italic text-3xl mb-6">Design</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Crafting seamless experiences, not just visuals. We build design systems that convert.</p>
+                </div>
             </div>
             <div class="relative group" data-aos="fade-up" data-aos-delay="400">
                 <span class="step-number">03</span>
-                <div class="process-content"><h4 class="serif italic text-3xl mb-6">Разработка</h4><p class="text-gray-500 text-sm leading-relaxed">Чистый код и современный стек. Мы создаем быстрые, надежные и безопасные цифровые продукты.</p></div>
+                <div class="relative z-10">
+                    <h4 class="serif italic text-3xl mb-6">Engineering</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Robust code and modern tech stacks. We build fast, secure, and scalable products.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="py-60 text-center relative px-6 z-10">
         <div data-aos="zoom-in">
-            <p class="uppercase text-[10px] tracking-[0.5em] mb-12 text-gray-600 font-bold italic">Есть идея для проекта?</p>
-            <a href="mailto:hello@mikhail.ru" class="serif text-5xl md:text-[10vw] hover:italic transition-all duration-700">Напишите нам</a>
+            <p class="uppercase text-[10px] tracking-[0.5em] mb-12 text-gray-600 font-bold italic">Have a project in mind?</p>
+            <a href="mailto:hello@mikhail.com" class="serif text-5xl md:text-[10vw] hover:italic transition-all duration-700">Let's Talk</a>
             <div class="mt-20 flex justify-center space-x-12 text-xs uppercase tracking-widest text-gray-500 font-bold">
                 <a href="#" class="hover:text-white transition">Telegram</a>
-                <a href="#" class="hover:text-white transition">WhatsApp</a>
+                <a href="#" class="hover:text-white transition">LinkedIn</a>
             </div>
         </div>
     </section>
 
     <footer class="py-12 px-6 md:px-16 flex flex-col md:flex-row justify-between items-center border-t border-white/5 text-[9px] uppercase tracking-[0.4em] text-gray-700 gap-6 relative z-10">
-        <div>© 2026 Михаил & Партнеры | Креативное бюро</div>
+        <div>© 2026 Mikhail & Company | Creative Bureau</div>
         <div class="hidden md:block">Kyiv — Warsaw — Global Presence</div>
-        <div class="italic serif normal-case text-xs text-white">Made for those who value quality.</div>
+        <div class="italic serif normal-case text-xs text-white">Engineering excellence with soul.</div>
     </footer>
 
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
