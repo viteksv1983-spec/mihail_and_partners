@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikhail & Company | Creative Bureau</title>
+    <title>Mikhail & Company | Креативное бюро</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
@@ -103,7 +103,7 @@
     <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center">
         <button id="menu-close" class="absolute top-10 right-10 text-5xl font-light hover:rotate-90 transition-all duration-500">&times;</button>
         <div class="flex flex-col space-y-10 text-center">
-            <a href="#work" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Работы</a>
+            <a href="#work" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Услуги</a>
             <a href="#process" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Процесс</a>
             <a href="#contact" class="serif text-6xl md:text-8xl hover:italic hover:text-gray-400 transition-all">Связь</a>
         </div>
@@ -111,11 +111,22 @@
 
     <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 relative overflow-hidden">
         <div class="hero-blob"></div>
-        <div class="relative z-10" data-aos="fade-up">
-            <h1 class="serif hero-title mb-12">Бутик <br> <span class="italic text-gray-400">цифровых</span> <br> решений.</h1>
-            <p class="max-w-2xl text-xl md:text-2xl text-gray-500 font-light leading-snug">
-                Мы объединяем видение Михаила с экспертизой мирового уровня для создания продуктов, задающих тренды.
-            </p>
+        <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
+            <div>
+                <h1 class="serif hero-title mb-12">Бутик <br> <span class="italic text-gray-400">цифровых</span> <br> решений.</h1>
+                <p class="max-w-xl text-xl md:text-2xl text-gray-500 font-light leading-snug">
+                    Мы объединяем видение Михаила с экспертизой мирового уровня для создания продуктов, которые задают тренды.
+                </p>
+            </div>
+            <div class="flex justify-center md:justify-end">
+                <div class="w-full max-w-md glass-card p-4 rounded-[2.5rem]" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="image_15.png" class="card-image mb-6 shadow-2xl" alt="Михаил">
+                    <div class="px-4 pb-4 text-center">
+                        <h3 class="text-2xl font-bold uppercase tracking-tighter leading-none">Михаил</h3>
+                        <p class="text-gray-500 text-xs mt-2 uppercase tracking-widest italic">Founder & Visionary</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -203,7 +214,7 @@
     </section>
 
     <footer class="py-12 px-6 md:px-16 flex flex-col md:flex-row justify-between items-center border-t border-white/5 text-[9px] uppercase tracking-[0.4em] text-gray-700 gap-6 relative z-10">
-        <div>© 2026 Mikhail & Company | Creative Bureau</div>
+        <div>© 2026 Mikhail & Company | Креативное бюро</div>
         <div class="hidden md:block">Kyiv — Warsaw — Global Presence</div>
         <div class="italic serif normal-case text-xs text-white">Инженерное совершенство с душой.</div>
     </footer>
@@ -257,5 +268,3 @@
     </script>
 </body>
 </html>
-
-
