@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Веб-разработка | Mikhail & Company</title>
+    <title>Mikhail & Company | Креативное бюро</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
@@ -15,124 +15,217 @@
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
         .serif { font-family: 'Playfair Display', serif; }
         
-        /* Заполнение пустоты: фоновый текст */
-        .bg-text { position: absolute; font-size: 20vw; font-weight: 900; opacity: 0.02; z-index: 0; pointer-events: none; white-space: nowrap; font-family: 'Inter', sans-serif; text-transform: uppercase; }
+        /* Фоновый текст для заполнения пустоты */
+        .bg-text { position: absolute; font-size: 25vw; font-weight: 900; opacity: 0.02; z-index: 0; pointer-events: none; white-space: nowrap; text-transform: uppercase; }
         
-        .glass-card { 
-            background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.07); 
-            backdrop-filter: blur(20px); transition: all 0.7s cubic-bezier(0.15, 1, 0.3, 1);
+        /* Анимированный фон */
+        .hero-blob {
+            position: absolute; top: -10%; right: -5%; width: 70vw; height: 70vw;
+            background: conic-gradient(from 90deg at 50% 50%, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+            filter: blur(120px); opacity: 0.2;
+            animation: blob-spin 30s linear infinite alternate; z-index: 0; mix-blend-mode: screen;
         }
-        .glass-card:hover { border-color: rgba(255, 255, 255, 0.3); transform: translateY(-12px); }
-        
-        .hero-title { font-size: clamp(3rem, 12vw, 10rem); line-height: 0.85; letter-spacing: -0.05em; }
-        
-        .tech-badge { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 0.75rem 2rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
-        .tech-badge:hover { background: #3b82f6; border-color: #3b82f6; }
+        @keyframes blob-spin { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(360deg) scale(1.2); } }
 
+        /* Бегущая строка */
+        .marquee { overflow: hidden; white-space: nowrap; background: #fff; color: #000; padding: 1.5rem 0; transform: rotate(-1deg) scale(1.05); z-index: 20; position: relative; }
+        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Меню */
         #menu-overlay { clip-path: circle(0% at 95% 5%); transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); pointer-events: none; }
         #menu-overlay.active { clip-path: circle(150% at 95% 5%); pointer-events: auto; }
+
+        /* Карточки */
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.07); 
+            backdrop-filter: blur(30px); transition: all 0.7s cubic-bezier(0.15, 1, 0.3, 1);
+        }
+        .glass-card:hover { border-color: rgba(255, 255, 255, 0.3); transform: translateY(-15px); }
+        .card-image { width: 100%; height: 500px; object-fit: cover; border-radius: 2rem; transition: transform 0.8s ease; }
         
+        .hero-title { font-size: clamp(3.5rem, 12vw, 11rem); line-height: 0.8; letter-spacing: -0.05em; }
+        .logo-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .logo-ampersand { background: linear-gradient(135deg, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
         .magnetic { transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); display: inline-block; }
+        .form-input { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 1.5rem; padding: 1.5rem; outline: none; transition: 0.3s; }
+        .form-input:focus { border-color: #3b82f6; background: rgba(255,255,255,0.06); }
+        
+        .stat-value { font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; line-height: 0.9; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed w-full z-[100] py-6 px-6 md:px-16 flex justify-between items-center bg-black/10 backdrop-blur-md border-b border-white/5">
+    <nav class="fixed w-full z-[100] py-8 px-6 md:px-16 flex justify-between items-center bg-black/10 backdrop-blur-md border-b border-white/5">
         <a href="index.html" class="flex items-center group">
-            <div class="w-11 h-11 flex justify-center items-center rounded-xl mr-4 border border-white/10 glass-card">
-                <span class="serif italic text-2xl bg-gradient-to-br from-blue-400 to-purple-500 bg-clip-text text-transparent">&</span>
-            </div>
+            <div class="logo-box w-12 h-12 flex justify-center items-center rounded-2xl mr-4"><span class="serif italic text-3xl logo-ampersand">&</span></div>
             <div class="flex flex-col leading-none">
-                <span class="font-black uppercase text-lg tracking-tighter text-white">Mikhail</span>
-                <span class="text-[9px] uppercase tracking-[0.35em] text-gray-500 font-bold mt-1.5">And Company</span>
+                <span class="font-black uppercase text-xl tracking-tighter text-white">Mikhail</span>
+                <span class="text-[9px] uppercase tracking-[0.4em] text-gray-500 font-bold mt-2">And Company</span>
             </div>
         </a>
-        <button id="menu-open" class="group flex items-center space-x-4 outline-none magnetic relative z-[102]">
-            <span class="text-[10px] uppercase tracking-[0.4em] font-bold group-hover:text-gray-400 transition">Меню</span>
-            <div class="space-y-1.5"><div class="w-8 h-0.5 bg-white"></div><div class="w-8 h-0.5 bg-white"></div></div>
+        <button id="menu-open" class="group flex items-center space-x-6 outline-none magnetic relative z-[102]">
+            <span class="text-[11px] uppercase tracking-[0.5em] font-bold group-hover:text-gray-400 transition">Меню</span>
+            <div class="space-y-2"><div class="w-10 h-0.5 bg-white"></div><div class="w-10 h-0.5 bg-white"></div></div>
         </button>
     </nav>
 
-    <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-32 relative overflow-hidden">
-        <div class="bg-text top-1/4 -left-20">DEVELOPMENT</div>
-        <div class="relative z-10" data-aos="fade-up">
-            <span class="text-blue-500 uppercase tracking-[0.5em] text-[10px] font-bold mb-8 block italic">High-End Web Engineering</span>
-            <h1 class="serif hero-title mb-12 text-white">Веб-дизайн <br> & <span class="text-gray-500">Инжиниринг.</span></h1>
-            <p class="max-w-2xl text-xl md:text-2xl text-gray-500 font-light italic leading-snug">
-                Мы создаем архитектуру для бизнеса. От сложных магазинов до интерфейсов, которые задают тренды на рынке.
-            </p>
+    <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center text-white">
+        <button id="menu-close" class="absolute top-10 right-10 text-6xl font-light hover:rotate-90 transition-all duration-500">&times;</button>
+        <div class="flex flex-col space-y-12 text-center">
+            <a href="#work" class="menu-link serif text-7xl md:text-9xl hover:italic transition-all">Услуги</a>
+            <a href="#vision" class="menu-link serif text-7xl md:text-9xl hover:italic transition-all">Видение</a>
+            <a href="#reviews" class="menu-link serif text-7xl md:text-9xl hover:italic transition-all">Мнения</a>
+            <a href="#contact" class="menu-link serif text-7xl md:text-9xl hover:italic transition-all">Связь</a>
+        </div>
+    </div>
+
+    <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 relative overflow-hidden pt-32">
+        <div class="bg-text -top-10 -left-20">EST. 2026</div>
+        <div class="hero-blob"></div>
+        <div class="relative z-10 grid lg:grid-cols-2 gap-16 items-center" data-aos="fade-up">
+            <div>
+                <h1 class="serif hero-title mb-12 text-white">Бутик <br> <span class="italic text-gray-400">цифровых</span> <br> решений.</h1>
+                <p class="max-w-xl text-xl md:text-2xl text-gray-500 font-light italic leading-snug">Мы объединяем видение Михаила с экспертизой партнеров для создания продуктов, которые определяют будущее рынка.</p>
+            </div>
+            <div class="flex justify-center lg:justify-end">
+                <div class="w-full max-w-[450px] glass-card p-5 rounded-[3rem] rotate-2">
+                    <img src="image_15.png" class="card-image mb-8 grayscale hover:grayscale-0 transition duration-1000 shadow-2xl" alt="Mikhail">
+                    <div class="px-6 pb-4 text-center">
+                        <h3 class="text-3xl font-bold uppercase tracking-tighter text-white">Михаил</h3>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-600 mt-3 font-bold">Founder & Visionary</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="py-40 px-6 md:px-16 bg-[#080808] border-y border-white/5 relative overflow-hidden">
-        <div class="bg-text -bottom-20 -right-20">EXPERTISE</div>
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
-            <div data-aos="fade-right">
-                <h2 class="serif text-5xl md:text-7xl italic mb-10 text-white">Технологическое <br> превосходство</h2>
-                <div class="flex flex-wrap gap-4">
-                    <div class="tech-badge">Next.js</div>
-                    <div class="tech-badge">React</div>
-                    <div class="tech-badge">Tailwind</div>
-                    <div class="tech-badge">Python</div>
-                    <div class="tech-badge">E-commerce</div>
-                    <div class="tech-badge">SEO Pro</div>
+    <div class="marquee my-20">
+        <div class="marquee-content">
+            E-COMMERCE SYSTEMS • TELEGRAM MINI APPS • AI SOLUTIONS • UI/UX EXCELLENCE • WEB ENGINEERING • NEXT.JS EXPERTISE • E-COMMERCE SYSTEMS • TELEGRAM MINI APPS • AI SOLUTIONS • UI/UX EXCELLENCE • WEB ENGINEERING • NEXT.JS EXPERTISE • 
+        </div>
+    </div>
+
+    <section id="work" class="py-40 px-6 md:px-16 relative z-10 bg-[#050505]">
+        <div class="bg-text top-1/4 right-0">SERVICES</div>
+        <div class="grid lg:grid-cols-2 gap-16">
+            <a href="web.html" class="glass-card p-8 rounded-[3.5rem]" data-aos="fade-up">
+                <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="card-image mb-12" alt="Web">
+                <div class="px-6 pb-6">
+                    <span class="text-[11px] uppercase tracking-[0.5em] text-blue-500 mb-4 block font-bold">01 / Инжиниринг</span>
+                    <h3 class="text-5xl font-bold uppercase tracking-tighter text-white mb-6 leading-none">Веб-дизайн</h3>
+                    <p class="text-gray-500 text-sm italic leading-relaxed">Создание сложных архитектурных решений и интернет-магазинов нового поколения.</p>
                 </div>
+            </a>
+            <a href="tg-apps.html" class="glass-card p-8 rounded-[3.5rem]" data-aos="fade-up" data-aos-delay="200">
+                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="card-image mb-12" alt="Telegram">
+                <div class="px-6 pb-6">
+                    <span class="text-[11px] uppercase tracking-[0.5em] text-purple-500 mb-4 block font-bold">02 / Экосистема</span>
+                    <h3 class="text-5xl font-bold uppercase tracking-tighter text-white mb-6 leading-none">TG Mini Apps</h3>
+                    <p class="text-gray-500 text-sm italic leading-relaxed">Разработка полноценных приложений внутри мессенджера Telegram для вашего бизнеса.</p>
+                </div>
+            </a>
+            <a href="mobile.html" class="glass-card p-8 rounded-[3.5rem]" data-aos="fade-up">
+                <img src="pawel-czerwinski-NJdfP9AlPjc-unsplash.jpg" class="card-image mb-12" alt="Mobile">
+                <div class="px-6 pb-6">
+                    <span class="text-[11px] uppercase tracking-[0.5em] text-pink-500 mb-4 block font-bold">03 / Мобильность</span>
+                    <h3 class="text-5xl font-bold uppercase tracking-tighter text-white mb-6 leading-none">Android & iOS</h3>
+                    <p class="text-gray-500 text-sm italic leading-relaxed">Проектирование и запуск нативных мобильных продуктов с фокусом на UX.</p>
+                </div>
+            </a>
+            <a href="bots.html" class="glass-card p-8 rounded-[3.5rem]" data-aos="fade-up" data-aos-delay="200">
+                <img src="shubham-dhage-O1rxducLjN0-unsplash.jpg" class="card-image mb-12" alt="Bots">
+                <div class="px-6 pb-6">
+                    <span class="text-[11px] uppercase tracking-[0.5em] text-emerald-500 mb-4 block font-bold">04 / Интеллект</span>
+                    <h3 class="text-5xl font-bold uppercase tracking-tighter text-white mb-6 leading-none">AI Чат-боты</h3>
+                    <p class="text-gray-500 text-sm italic leading-relaxed">Интеграция искусственного интеллекта для автоматизации ваших продаж 24/7.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="py-60 px-6 md:px-16 bg-[#080808] border-y border-white/5 relative z-10 overflow-hidden">
+        <div class="bg-text -bottom-10 left-10">TRUST</div>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-24">
+            <div class="text-center md:text-left" data-aos="fade-up">
+                <div class="stat-value text-blue-500 mb-8 italic">1000+</div>
+                <h4 class="text-xs uppercase tracking-[0.5em] font-bold text-gray-500 mb-6">Клиентов</h4>
+                <p class="text-sm text-gray-600 italic leading-relaxed">Реализованных через флагманский проект NSW.</p>
             </div>
-            <div class="space-y-12" data-aos="fade-left">
-                <div class="border-l-2 border-blue-500 pl-8">
-                    <h4 class="text-xl font-bold uppercase mb-2">Производительность</h4>
-                    <p class="text-gray-500 text-sm italic">Мы оптимизируем каждый байт. Скорость загрузки — это не роскошь, а фундамент ваших продаж.</p>
-                </div>
-                <div class="border-l-2 border-purple-500 pl-8">
-                    <h4 class="text-xl font-bold uppercase mb-2">Адаптивность</h4>
-                    <p class="text-gray-500 text-sm italic">Ваш проект будет выглядеть безупречно на любом устройстве: от Apple Watch до 8K мониторов.</p>
-                </div>
+            <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-value text-purple-500 mb-8 italic">3+</div>
+                <h4 class="text-xs uppercase tracking-[0.5em] font-bold text-gray-500 mb-6">Года опыта</h4>
+                <p class="text-sm text-gray-600 italic leading-relaxed">В разработке высоконагруженных e-commerce платформ.</p>
+            </div>
+            <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-value text-pink-500 mb-8 italic">100%</div>
+                <h4 class="text-xs uppercase tracking-[0.5em] font-bold text-gray-500 mb-6">Результат</h4>
+                <p class="text-sm text-gray-600 italic leading-relaxed">Полная концентрация на качестве кода и визуального языка.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="py-40 px-6 md:px-16 relative overflow-hidden bg-[#050505]">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-32 items-center">
+            <div data-aos="fade-right">
+                <span class="text-[11px] uppercase tracking-[0.6em] text-gray-600 font-bold mb-10 block italic">Философия Bureau</span>
+                <h2 class="serif text-6xl md:text-9xl italic leading-tight text-white">Цифровая <br> <span class="text-gray-600">эволюция</span></h2>
+            </div>
+            <div data-aos="fade-left" data-aos-delay="200">
+                <p class="text-2xl md:text-3xl text-gray-400 font-light leading-relaxed mb-10">Мы верим, что технологии должны быть невидимыми, а результат — ощутимым.</p>
+                <p class="text-lg text-gray-600 font-light italic leading-relaxed">Для бюро Михаил и партнеры каждый проект — это живая экосистема, которая говорит на языке ваших пользователей.</p>
             </div>
         </div>
     </section>
 
     
 
-    <section class="py-40 px-6 md:px-16 relative z-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-20 items-center">
-                <div class="glass-card p-4 rounded-[3rem]" data-aos="zoom-in">
-                    <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="w-full h-[600px] object-cover rounded-[2.5rem] grayscale hover:grayscale-0 transition duration-1000" alt="NSW Project">
+    <section id="reviews" class="py-40 px-6 md:px-16 relative z-10 bg-[#050505]">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
+            <div class="glass-card p-16 rounded-[4rem] relative" data-aos="fade-up">
+                <span class="quote-mark text-blue-500">“</span>
+                <p class="text-2xl font-light italic leading-relaxed mb-12 text-gray-300">«Проект NSW стал эталоном e-commerce в нашей нише. Михаил создал систему, которая просто работает».</p>
+                <div class="flex items-center space-x-6">
+                    <div class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center font-bold text-blue-500 text-xl">A.K.</div>
+                    <div><h4 class="text-xl font-bold uppercase tracking-tighter text-white">Александр К.</h4><p class="text-[10px] uppercase tracking-[0.3em] text-gray-600 font-bold italic mt-1">CEO, Sneaker Warehouse</p></div>
                 </div>
-                <div data-aos="fade-left">
-                    <span class="text-xs uppercase tracking-[0.4em] text-gray-600 mb-6 block">Реализованный проект</span>
-                    <h2 class="serif text-6xl md:text-8xl italic mb-10 text-white leading-none">NSW <br> Warehouse</h2>
-                    <p class="text-xl text-gray-400 mb-10 font-light leading-relaxed">
-                        Разработка современной платформы nsw.com.ua. Мы создали быстрый интерфейс для ведущего поставщика Nike в Украине.
-                    </p>
-                    <div class="grid grid-cols-2 gap-8 mb-12">
-                        <div>
-                            <div class="text-3xl font-bold text-blue-500">1000+</div>
-                            <div class="text-[10px] uppercase tracking-widest text-gray-600 mt-2">Активных клиентов</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-bold text-purple-500">SEO</div>
-                            <div class="text-[10px] uppercase tracking-widest text-gray-600 mt-2">Топ выдачи в Украине</div>
-                        </div>
-                    </div>
-                    <a href="https://nsw.com.ua/" target="_blank" class="magnetic text-blue-500 uppercase tracking-[0.5em] text-[10px] font-bold border-b border-blue-500/30 pb-2 hover:border-blue-500 transition-all">Открыть проект →</a>
+            </div>
+            <div class="glass-card p-16 rounded-[4rem] relative" data-aos="fade-up" data-aos-delay="200">
+                <span class="quote-mark text-purple-500">“</span>
+                <p class="text-2xl font-light italic leading-relaxed mb-12 text-gray-300">«Автоматизация через TG ботов окупила себя за первый месяц. Уровень инжиниринга здесь на голову выше рынка».</p>
+                <div class="flex items-center space-x-6">
+                    <div class="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center font-bold text-purple-500 text-xl">M.P.</div>
+                    <div><h4 class="text-xl font-bold uppercase tracking-tighter text-white">Максим П.</h4><p class="text-[10px] uppercase tracking-[0.3em] text-gray-600 font-bold italic mt-1">Бизнес-партнер</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-40 text-center border-t border-white/5 px-6 relative overflow-hidden">
-        <div class="bg-text -top-10 left-1/2 -translate-x-1/2">CONNECT</div>
-        <div data-aos="zoom-in" class="relative z-10">
-            <h2 class="serif text-6xl md:text-9xl mb-12 italic text-white leading-none">Создадим <br> будущее?</h2>
-            <a href="index.html#contact" class="text-xl uppercase tracking-[0.5em] text-blue-500 border-b border-blue-500 pb-2 magnetic">Обсудить проект</a>
-        </div>
-        <div class="mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-[0.4em] text-gray-700 gap-8">
-            <div>© 2026 Mikhail & Company</div>
-            <div class="flex gap-12">
-                <div class="flex flex-col items-center"><span class="text-gray-500 mb-1">Киев</span><span id="time-kyiv" class="text-white font-bold tracking-widest text-[11px]">00:00:00</span></div>
-                <div class="flex flex-col items-center"><span class="text-gray-500 mb-1">Варшава</span><span id="time-warsaw" class="text-white font-bold tracking-widest text-[11px]">00:00:00</span></div>
+    <section id="contact" class="py-40 px-6 bg-[#050505] relative z-10 border-t border-white/5">
+        <div class="max-w-5xl mx-auto" data-aos="fade-up">
+            <div class="text-center mb-24">
+                <h2 class="serif text-7xl md:text-[10rem] italic text-white leading-none">Давайте <br> создадим.</h2>
             </div>
+            <form id="tg-form" class="logo-box p-12 md:p-20 rounded-[4rem] space-y-12">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <input type="text" name="name" required placeholder="Ваше имя" class="form-input">
+                    <input type="text" name="contact" required placeholder="Telegram / WhatsApp" class="form-input">
+                </div>
+                <textarea name="message" rows="5" required placeholder="Опишите ваш проект..." class="form-input"></textarea>
+                <button type="submit" class="w-full bg-blue-600 text-white font-black py-7 rounded-2xl uppercase tracking-[0.4em] text-xs transition-all magnetic">Отправить в Telegram</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-16 px-6 md:px-16 flex flex-col md:flex-row justify-between items-center border-t border-white/5 text-[10px] uppercase tracking-[0.5em] text-gray-700 gap-10 relative z-10">
+        <div class="flex flex-col gap-3">
+            <div class="font-bold">© 2026 Mikhail & Company</div>
+            <div class="text-white opacity-40 italic normal-case text-sm">Crafting digital future with precision.</div>
+        </div>
+        <div class="flex gap-20">
+            <div class="flex flex-col items-center"><span class="text-gray-500 mb-2">Киев</span><span id="time-kyiv" class="text-white font-bold tracking-widest text-[12px]">00:00:00</span></div>
+            <div class="flex flex-col items-center"><span class="text-gray-500 mb-2">Варшава</span><span id="time-warsaw" class="text-white font-bold tracking-widest text-[12px]">00:00:00</span></div>
         </div>
     </footer>
 
@@ -142,7 +235,12 @@
         const lenis = new Lenis();
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
-        AOS.init({ duration: 1000, once: false });
+        AOS.init({ duration: 1200, once: false });
+
+        const menuBtn = document.getElementById('menu-open'), closeBtn = document.getElementById('menu-close'), overlay = document.getElementById('menu-overlay'), menuLinks = document.querySelectorAll('.menu-link');
+        menuBtn.addEventListener('click', () => overlay.classList.add('active'));
+        closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+        menuLinks.forEach(l => l.addEventListener('click', () => overlay.classList.remove('active')));
 
         function updateTime() {
             const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
@@ -155,8 +253,8 @@
         magnetics.forEach(el => {
             el.addEventListener('mousemove', (e) => {
                 const pos = el.getBoundingClientRect();
-                const x = (e.clientX - pos.left - pos.width / 2) * 0.3;
-                const y = (e.clientY - pos.top - pos.height / 2) * 0.3;
+                const x = (e.clientX - pos.left - pos.width / 2) * 0.4;
+                const y = (e.clientY - pos.top - pos.height / 2) * 0.4;
                 el.style.transform = `translate(${x}px, ${y}px)`;
             });
             el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0px, 0px)'; });
