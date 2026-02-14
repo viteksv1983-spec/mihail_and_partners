@@ -24,16 +24,8 @@
         }
         @keyframes blob-spin { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(360deg) scale(1.1); } }
 
-        /* ИСПРАВЛЕННОЕ МЕНЮ */
-        #menu-overlay { 
-            clip-path: circle(0% at 95% 5%); 
-            transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); 
-            pointer-events: none; /* Чтобы не блокировало кнопки, когда закрыто */
-        }
-        #menu-overlay.active { 
-            clip-path: circle(150% at 95% 5%); 
-            pointer-events: auto; /* Включаем клики, когда открыто */
-        }
+        #menu-overlay { clip-path: circle(0% at 95% 5%); transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); pointer-events: none; }
+        #menu-overlay.active { clip-path: circle(150% at 95% 5%); pointer-events: auto; }
 
         .glass-card { 
             background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.07); 
@@ -41,17 +33,19 @@
         }
         .glass-card:hover { border-color: rgba(255, 255, 255, 0.3); transform: translateY(-12px); }
         .card-image { width: 100%; height: 450px; object-fit: cover; border-radius: 1.5rem; transition: transform 0.8s ease; }
-        .glass-card:hover .card-image { transform: scale(1.03); }
-
+        
         .hero-title { font-size: clamp(3.5rem, 12vw, 10rem); line-height: 0.8; letter-spacing: -0.05em; }
         .logo-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
         .logo-ampersand { background: linear-gradient(135deg, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
+        .magnetic { transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); display: inline-block; }
         .form-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 1.25rem; outline: none; transition: 0.3s; }
         .form-input:focus { border-color: #3b82f6; }
         
-        .magnetic { transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); display: inline-block; }
         .step-number { font-size: 8rem; opacity: 0.05; position: absolute; top: -2rem; left: -1rem; font-weight: 800; }
+        
+        /* Специфический стиль для блока цифр */
+        .stat-value { font-size: clamp(3rem, 8vw, 6rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
     </style>
 </head>
 <body>
@@ -66,10 +60,7 @@
         </a>
         <button id="menu-open" class="group flex items-center space-x-4 outline-none magnetic relative z-[102]">
             <span class="text-[10px] uppercase tracking-[0.4em] font-bold group-hover:text-gray-400 transition">Меню</span>
-            <div class="space-y-1.5">
-                <div class="w-8 h-0.5 bg-white transition-all group-hover:w-6"></div>
-                <div class="w-8 h-0.5 bg-white transition-all group-hover:w-10"></div>
-            </div>
+            <div class="space-y-1.5"><div class="w-8 h-0.5 bg-white transition-all"></div><div class="w-8 h-0.5 bg-white transition-all"></div></div>
         </button>
     </nav>
 
@@ -88,70 +79,16 @@
         <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
             <div>
                 <h1 class="serif hero-title mb-12 text-white">Бутик <br> <span class="italic text-gray-400">цифровых</span> <br> решений.</h1>
-                <p class="max-w-xl text-xl text-gray-500 font-light italic leading-snug">Мы объединяем опыт Михаила и его партнеров для создания продуктов, которые задают тренды на рынке.</p>
+                <p class="max-w-xl text-xl text-gray-500 font-light italic leading-snug">Мы объединяем видение Михаила с экспертизой мирового уровня для создания продуктов, задающих тренды на рынке.</p>
             </div>
             <div class="flex justify-center md:justify-end">
                 <div class="w-full max-w-md glass-card p-4 rounded-[2.5rem] rotate-2">
-                    <img src="image_15.png" class="card-image mb-6 grayscale hover:grayscale-0 transition duration-1000" alt="Mikhail">
+                    <img src="image_15.png" class="card-image mb-6 grayscale hover:grayscale-0 transition duration-1000 shadow-2xl" alt="Mikhail">
                     <div class="px-4 pb-4 text-center">
                         <h3 class="text-2xl font-bold uppercase tracking-tighter">Михаил</h3>
-                        <p class="text-[10px] uppercase tracking-widest text-gray-600 mt-2 font-bold">Founder & Visionary</p>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-600 mt-2 font-bold">Основатель и Визионер</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="work" class="py-20 px-6 md:px-16 relative z-10 bg-[#050505]">
-        <div class="grid md:grid-cols-2 gap-12">
-            <a href="web.html" class="glass-card p-6 rounded-[2.5rem]" data-aos="fade-up">
-                <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="card-image mb-10">
-                <div class="px-4 pb-4">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">01 / Web Design</span>
-                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Создание сайтов</h3>
-                </div>
-            </a>
-            <a href="tg-apps.html" class="glass-card p-6 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="200">
-                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="card-image mb-10">
-                <div class="px-4 pb-4">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">02 / Ecosystem</span>
-                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Telegram Mini Apps</h3>
-                </div>
-            </a>
-            <a href="mobile.html" class="glass-card p-6 rounded-[2.5rem]" data-aos="fade-up">
-                <img src="pawel-czerwinski-NJdfP9AlPjc-unsplash.jpg" class="card-image mb-10">
-                <div class="px-4 pb-4">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">03 / Experience</span>
-                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Android & iOS</h3>
-                </div>
-            </a>
-            <a href="bots.html" class="glass-card p-6 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="200">
-                <img src="shubham-dhage-O1rxducLjN0-unsplash.jpg" class="card-image mb-10">
-                <div class="px-4 pb-4">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gray-600 mb-2 block italic">04 / Intelligence</span>
-                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Умные боты</h3>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="process" class="py-40 px-6 md:px-16 bg-[#080808] relative z-10">
-        <div class="mb-24" data-aos="fade">
-            <span class="text-xs uppercase tracking-[0.5em] text-gray-600">Наш метод</span>
-            <h2 class="serif text-5xl md:text-7xl italic mt-4">Методология</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-16">
-            <div class="relative group" data-aos="fade-up">
-                <span class="step-number">01</span>
-                <div class="relative z-10"><h4 class="serif italic text-3xl mb-6">Стратегия</h4><p class="text-gray-500 text-sm leading-relaxed">Мы расшифровываем ДНК вашего бренда, чтобы найти уникальные точки роста.</p></div>
-            </div>
-            <div class="relative group" data-aos="fade-up" data-aos-delay="200">
-                <span class="step-number">02</span>
-                <div class="relative z-10"><h4 class="serif italic text-3xl mb-6">Дизайн</h4><p class="text-gray-500 text-sm leading-relaxed">Проектируем опыт, превращая визуал в инструмент продаж.</p></div>
-            </div>
-            <div class="relative group" data-aos="fade-up" data-aos-delay="400">
-                <span class="step-number">03</span>
-                <div class="relative z-10"><h4 class="serif italic text-3xl mb-6">Разработка</h4><p class="text-gray-500 text-sm leading-relaxed">Чистый код и современные стеки для масштабируемых продуктов.</p></div>
             </div>
         </div>
     </section>
@@ -163,8 +100,34 @@
                 <h2 class="serif text-5xl md:text-7xl italic leading-tight text-white">Цифровая <br> <span class="text-gray-500">эволюция</span></h2>
             </div>
             <div data-aos="fade-left" data-aos-delay="200">
-                <p class="text-xl md:text-2xl text-gray-400 font-light leading-relaxed mb-8">Мы верим, что технологии должны быть невидимыми, а результат — ощутимым. В мире цифрового шума мы создаем чистоту и смысл.</p>
-                <p class="text-lg text-gray-600 font-light italic leading-relaxed">Для бюро Mikhail & Company каждый проект — это не просто код, это живая экосистема.</p>
+                <p class="text-xl md:text-2xl text-gray-400 font-light leading-relaxed mb-8">
+                    Мы верим, что технологии должны быть невидимыми, а результат — ощутимым. В мире цифрового шума мы создаем чистоту и смысл.
+                </p>
+                <p class="text-lg text-gray-600 font-light italic leading-relaxed">
+                    Для Mikhail & Company каждый проект — это живая экосистема, которая говорит на языке ваших пользователей.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-40 px-6 md:px-16 bg-[#080808] border-y border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-20">
+                <div class="text-center md:text-left" data-aos="fade-up">
+                    <div class="stat-value text-blue-500 mb-6 tracking-tighter">1000+</div>
+                    <h4 class="text-xs uppercase tracking-[0.4em] font-bold text-gray-500 mb-4">Довольных клиентов</h4>
+                    <p class="text-sm text-gray-600 italic">Успешно реализованных заказов через систему NSW.</p>
+                </div>
+                <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-value text-purple-500 mb-6 tracking-tighter">3+</div>
+                    <h4 class="text-xs uppercase tracking-[0.4em] font-bold text-gray-500 mb-4">Года опыта</h4>
+                    <p class="text-sm text-gray-600 italic">Глубокой экспертизы в e-commerce и веб-инжиниринге.</p>
+                </div>
+                <div class="text-center md:text-left" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-value text-pink-500 mb-6 tracking-tighter">100%</div>
+                    <h4 class="text-xs uppercase tracking-[0.4em] font-bold text-gray-500 mb-4">Фокус</h4>
+                    <p class="text-sm text-gray-600 italic">Бескомпромиссная концентрация на качестве и финальном результате.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -177,9 +140,8 @@
                     <input type="text" name="name" required placeholder="Ваше имя" class="form-input">
                     <input type="text" name="contact" required placeholder="Telegram / WhatsApp" class="form-input">
                 </div>
-                <textarea name="message" rows="4" required placeholder="Опишите ваш проект..." class="form-input"></textarea>
-                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl uppercase tracking-[0.3em] text-xs transition-all magnetic">Отправить заявку</button>
-                <p id="form-status" class="text-center text-xs mt-4 hidden"></p>
+                <textarea name="message" rows="4" required placeholder="Опишите проект..." class="form-input"></textarea>
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl uppercase tracking-[0.3em] text-xs transition-all magnetic">Отправить</button>
             </form>
         </div>
     </section>
@@ -187,7 +149,7 @@
     <footer class="py-12 px-6 md:px-16 flex flex-col md:flex-row justify-between items-center border-t border-white/5 text-[9px] uppercase tracking-[0.4em] text-gray-700 gap-8 relative z-10">
         <div class="flex flex-col gap-2">
             <div>© 2026 Mikhail & Company</div>
-            <div class="text-white opacity-50 italic normal-case text-xs">Инженерное совершенство с душой.</div>
+            <div class="text-white opacity-50 italic normal-case text-xs">Инженерное совершенство.</div>
         </div>
         <div class="flex gap-12">
             <div class="flex flex-col items-center"><span class="text-gray-500 mb-1">Киев</span><span id="time-kyiv" class="text-white font-bold tracking-widest text-[11px]">00:00:00</span></div>
@@ -204,15 +166,10 @@
         requestAnimationFrame(raf);
         AOS.init({ duration: 1000, once: false });
 
-        // МЕНЮ СКРИПТ (ОБНОВЛЕННЫЙ)
-        const menuBtn = document.getElementById('menu-open');
-        const closeBtn = document.getElementById('menu-close');
-        const overlay = document.getElementById('menu-overlay');
-        const links = document.querySelectorAll('.menu-link');
-
+        const menuBtn = document.getElementById('menu-open'), closeBtn = document.getElementById('menu-close'), overlay = document.getElementById('menu-overlay'), menuLinks = document.querySelectorAll('.menu-link');
         menuBtn.addEventListener('click', () => overlay.classList.add('active'));
         closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
-        links.forEach(l => l.addEventListener('click', () => overlay.classList.remove('active')));
+        menuLinks.forEach(l => l.addEventListener('click', () => overlay.classList.remove('active')));
 
         function updateTime() {
             const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
@@ -233,4 +190,5 @@
         });
     </script>
 </body>
-</html>
+</html>l>
+
