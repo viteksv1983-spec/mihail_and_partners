@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikhail & Company | Creative Bureau</title>
+    <title>Mikhail & Company | Креативное бюро</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
@@ -40,7 +40,6 @@
 
         .form-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; padding: 1.25rem; outline: none; }
         
-        /* Магнитный эффект */
         .magnetic { transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); display: inline-block; }
     </style>
 </head>
@@ -60,11 +59,12 @@
         </button>
     </nav>
 
-    <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center">
+    <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center text-white">
         <button id="menu-close" class="absolute top-10 right-10 text-5xl font-light">&times;</button>
-        <div class="flex flex-col space-y-10 text-center text-white">
+        <div class="flex flex-col space-y-10 text-center">
             <a href="#work" class="serif text-6xl md:text-8xl hover:italic transition-all">Услуги</a>
-            <a href="#process" class="serif text-6xl md:text-8xl hover:italic transition-all">Процесс</a>
+            <a href="#process" class="serif text-6xl md:text-8xl hover:italic transition-all">Метод</a>
+            <a href="#vision" class="serif text-6xl md:text-8xl hover:italic transition-all">Видение</a>
             <a href="#contact" class="serif text-6xl md:text-8xl hover:italic transition-all">Связь</a>
         </div>
     </div>
@@ -74,30 +74,50 @@
         <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
             <div>
                 <h1 class="serif hero-title mb-12">Бутик <br> <span class="italic text-gray-400">цифровых</span> <br> решений.</h1>
-                <p class="max-w-xl text-xl text-gray-500 font-light italic">Создаем продукты, которые задают тренды.</p>
+                <p class="max-w-xl text-xl text-gray-500 font-light italic">Мы объединяем видение Михаила с экспертизой мирового уровня.</p>
             </div>
             <div class="flex justify-center md:justify-end">
                 <div class="w-full max-w-md glass-card p-4 rounded-[2.5rem] rotate-2">
                     <img src="image_15.png" class="card-image mb-6 grayscale hover:grayscale-0 transition duration-1000" alt="Mikhail">
                     <div class="px-4 pb-4 text-center">
                         <h3 class="text-2xl font-bold uppercase tracking-tighter">Михаил</h3>
-                        <p class="text-[10px] uppercase tracking-widest text-gray-600 mt-2 font-bold">Founder & Visionary</p>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-600 mt-2 font-bold">Основатель и Визионер</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-40 px-6 bg-[#050505] border-t border-white/5 relative z-10">
+    <section id="vision" class="py-40 px-6 md:px-16 relative overflow-hidden bg-[#050505]">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div data-aos="fade-right">
+                <span class="text-[10px] uppercase tracking-[0.5em] text-gray-600 font-bold mb-8 block italic">Наша Философия</span>
+                <h2 class="serif text-5xl md:text-7xl italic leading-tight text-white">Цифровая <br> <span class="text-gray-500">эволюция</span></h2>
+            </div>
+            <div data-aos="fade-left" data-aos-delay="200">
+                <p class="text-xl md:text-2xl text-gray-400 font-light leading-relaxed mb-8">
+                    Мы верим, что технологии должны быть невидимыми, а результат — ощутимым. В мире цифрового шума мы создаем чистоту и смысл.
+                </p>
+                <p class="text-lg text-gray-600 font-light italic leading-relaxed">
+                    Для Mikhail & Company каждый проект — это не просто код, это живая экосистема, которая говорит на языке ваших пользователей.
+                </p>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+    </section>
+
+    
+
+    <section id="contact" class="py-40 px-6 bg-[#050505] relative z-10">
         <div class="max-w-4xl mx-auto" data-aos="fade-up">
-            <div class="text-center mb-16"><h2 class="serif text-5xl md:text-8xl italic">Let's Connect</h2></div>
+            <div class="text-center mb-16"><h2 class="serif text-5xl md:text-8xl italic">Связаться</h2></div>
             <form id="tg-form" class="logo-box p-8 md:p-12 rounded-[3rem] space-y-8">
                 <div class="grid md:grid-cols-2 gap-8">
                     <input type="text" name="name" required placeholder="Ваше имя" class="form-input">
                     <input type="text" name="contact" required placeholder="Telegram / WhatsApp" class="form-input">
                 </div>
                 <textarea name="message" rows="4" required placeholder="Опишите ваш проект..." class="form-input"></textarea>
-                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl uppercase tracking-[0.3em] text-xs transition-all magnetic">Отправить</button>
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl uppercase tracking-[0.3em] text-xs transition-all magnetic">Отправить заявку</button>
                 <p id="form-status" class="text-center text-xs mt-4 hidden"></p>
             </form>
         </div>
@@ -106,21 +126,21 @@
     <footer class="py-12 px-6 md:px-16 flex flex-col md:flex-row justify-between items-center border-t border-white/5 text-[9px] uppercase tracking-[0.4em] text-gray-700 gap-8 relative z-10">
         <div class="flex flex-col gap-2">
             <div>© 2026 Mikhail & Company</div>
-            <div class="text-white opacity-50 italic normal-case text-xs">Engineering excellence.</div>
+            <div class="text-white opacity-50 italic normal-case text-xs">Инженерное совершенство.</div>
         </div>
         
         <div class="flex gap-12">
             <div class="flex flex-col items-center">
-                <span class="text-gray-500 mb-1">Kyiv</span>
+                <span class="text-gray-500 mb-1">Киев</span>
                 <span id="time-kyiv" class="text-white font-bold tracking-widest text-[11px]">00:00:00</span>
             </div>
             <div class="flex flex-col items-center">
-                <span class="text-gray-500 mb-1">Warsaw</span>
+                <span class="text-gray-500 mb-1">Варшава</span>
                 <span id="time-warsaw" class="text-white font-bold tracking-widest text-[11px]">00:00:00</span>
             </div>
         </div>
 
-        <div class="hidden md:block">Global Presence</div>
+        <div class="hidden md:block">Глобальное присутствие</div>
     </footer>
 
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
@@ -131,22 +151,20 @@
         requestAnimationFrame(raf);
         AOS.init({ duration: 1000, once: false });
 
-        // Живое время
         function updateTime() {
             const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            document.getElementById('time-kyiv').textContent = new Intl.DateTimeFormat('en-GB', { ...options, timeZone: 'Europe/Kyiv' }).format(new Date());
-            document.getElementById('time-warsaw').textContent = new Intl.DateTimeFormat('en-GB', { ...options, timeZone: 'Europe/Warsaw' }).format(new Date());
+            document.getElementById('time-kyiv').textContent = new Intl.DateTimeFormat('ru-RU', { ...options, timeZone: 'Europe/Kyiv' }).format(new Date());
+            document.getElementById('time-warsaw').textContent = new Intl.DateTimeFormat('ru-RU', { ...options, timeZone: 'Europe/Warsaw' }).format(new Date());
         }
         setInterval(updateTime, 1000); updateTime();
 
-        // Магнитные кнопки
         const magnetics = document.querySelectorAll('.magnetic');
         magnetics.forEach(el => {
             el.addEventListener('mousemove', (e) => {
                 const pos = el.getBoundingClientRect();
-                const x = e.clientX - pos.left - pos.width / 2;
-                const y = e.clientY - pos.top - pos.height / 2;
-                el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                const x = (e.clientX - pos.left - pos.width / 2) * 0.3;
+                const y = (e.clientY - pos.top - pos.height / 2) * 0.3;
+                el.style.transform = `translate(${x}px, ${y}px)`;
             });
             el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0px, 0px)'; });
         });
