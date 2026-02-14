@@ -12,25 +12,37 @@
         .lenis-smooth { scroll-behavior: auto !important; }
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
         .serif { font-family: 'Playfair Display', serif; }
+        
         .glass-card { 
             background: rgba(255, 255, 255, 0.02); 
             border: 1px solid rgba(255, 255, 255, 0.08); 
-            backdrop-filter: blur(15px);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(20px);
+            transition: all 0.7s cubic-bezier(0.15, 1, 0.3, 1);
+            overflow: hidden;
         }
         .glass-card:hover { 
             border-color: rgba(255, 255, 255, 0.3); 
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-15px); 
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-10px); 
+        }
+        .card-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 2rem;
+            transition: all 0.7s ease;
+        }
+        .glass-card:hover .card-image {
+            transform: scale(1.05);
         }
         .hero-title { font-size: clamp(3rem, 11vw, 9rem); line-height: 0.8; letter-spacing: -0.05em; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed w-full z-50 py-10 px-6 md:px-16 flex justify-between items-center">
+    <nav class="fixed w-full z-50 py-10 px-6 md:px-16 flex justify-between items-center bg-black/20 backdrop-blur-md">
         <div class="text-xl font-black uppercase tracking-tighter">Михаил <span class="serif italic font-normal text-gray-500">&</span> П.</div>
-        <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.4em] font-bold opacity-50 hover:opacity-100 transition">
+        <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.4em] font-bold opacity-50">
             <a href="#services">Услуги</a>
             <a href="#contact">Контакт</a>
         </div>
@@ -38,70 +50,44 @@
 
     <section class="min-h-screen flex flex-col justify-center px-6 md:px-16">
         <div data-aos="fade-up" data-aos-duration="1500">
-            <h1 class="serif hero-title mb-16">
-                Создаем <br> 
-                <span class="italic text-gray-400">будущее</span> <br> 
-                в коде.
-            </h1>
-        </div>
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-10" data-aos="fade-up" data-aos-delay="500">
-            <p class="max-w-md text-xl text-gray-500 leading-tight font-light italic">
-                Независимое бюро Михаила и партнеров. Дизайн и разработка премиального уровня.
-            </p>
-            <div class="text-[10px] uppercase tracking-widest font-bold border-b border-white/20 pb-2">Киев — 2026</div>
+            <h1 class="serif hero-title mb-16">Создаем <br> <span class="italic text-gray-500">цифровую</span> <br> эстетику.</h1>
         </div>
     </section>
 
     <section id="services" class="py-20 px-6 md:px-16">
-        <div class="grid md:grid-cols-2 gap-10">
+        <div class="grid md:grid-cols-2 gap-8">
             
-            <div class="glass-card p-12 rounded-[3rem] min-h-[550px] flex flex-col justify-between" data-aos="fade-up">
-                <div>
-                    <h3 class="text-4xl font-bold uppercase mb-4 tracking-tighter">Создание<br>сайтов</h3>
-                    <p class="text-gray-500 text-sm max-w-[280px]">Быстрые, адаптивные сайты, которые становятся лицом вашего бизнеса.</p>
-                </div>
-                <div class="flex justify-center items-center py-6">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" class="w-72 h-72 object-contain" alt="Web Design">
-                </div>
+            <div class="glass-card p-8 rounded-[3rem]" data-aos="fade-up">
+                <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="card-image mb-8" alt="Создание сайтов">
+                <h3 class="text-3xl font-bold uppercase mb-2">Создание сайтов</h3>
+                <p class="text-gray-500 text-sm italic">Премиальные веб-решения для вашего бизнеса.</p>
             </div>
 
-            <div class="glass-card p-12 rounded-[3rem] min-h-[550px] flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
-                <div>
-                    <h3 class="text-4xl font-bold uppercase mb-4 tracking-tighter">Телеграм<br>приложения</h3>
-                    <p class="text-gray-500 text-sm max-w-[280px]">Интеграция сложных сервисов и Mini Apps в экосистему Telegram.</p>
-                </div>
-                <div class="flex justify-center items-center py-6">
-                    <img src="https://images.unsplash.com/photo-1633167606207-d840b5070fc2?q=80&w=600&auto=format&fit=crop" class="w-72 h-72 object-contain" alt="Telegram Apps">
-                </div>
+            <div class="glass-card p-8 rounded-[3rem]" data-aos="fade-up" data-aos-delay="200">
+                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="card-image mb-8" alt="Телеграм приложения">
+                <h3 class="text-3xl font-bold uppercase mb-2">Телеграм приложения</h3>
+                <p class="text-gray-500 text-sm italic">Mini Apps и инновации в мессенджере.</p>
             </div>
 
-            <div class="glass-card p-12 rounded-[3rem] min-h-[550px] flex flex-col justify-between" data-aos="fade-up">
-                <div>
-                    <h3 class="text-4xl font-bold uppercase mb-4 tracking-tighter">Создание приложений<br>Android и iOS</h3>
-                    <p class="text-gray-500 text-sm max-w-[280px]">Нативная разработка мощных мобильных решений для любого бизнеса.</p>
-                </div>
-                <div class="flex justify-center items-center py-6">
-                    <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=600&auto=format&fit=crop" class="w-72 h-72 object-contain" alt="Mobile Apps">
-                </div>
+            <div class="glass-card p-8 rounded-[3rem]" data-aos="fade-up">
+                <img src="pawel-czerwinski-NJdfP9AlPjc-unsplash.jpg" class="card-image mb-8" alt="Android и iOS">
+                <h3 class="text-3xl font-bold uppercase mb-2">Android и iOS</h3>
+                <p class="text-gray-500 text-sm italic">Мобильные приложения любой сложности.</p>
             </div>
 
-            <div class="glass-card p-12 rounded-[3rem] min-h-[550px] flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
-                <div>
-                    <h3 class="text-4xl font-bold uppercase mb-4 tracking-tighter">Создание ботов<br>для Telegram</h3>
-                    <p class="text-gray-500 text-sm max-w-[280px]">Автоматизация процессов и интеллектуальные чат-боты любой сложности.</p>
-                </div>
-                <div class="flex justify-center items-center py-6">
-                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=crop" class="w-72 h-72 object-contain" alt="Bots">
-                </div>
+            <div class="glass-card p-8 rounded-[3rem]" data-aos="fade-up" data-aos-delay="200">
+                <img src="shubham-dhage-O1rxducLjN0-unsplash.jpg" class="card-image mb-8" alt="Боты">
+                <h3 class="text-3xl font-bold uppercase mb-2">Telegram Боты</h3>
+                <p class="text-gray-500 text-sm italic">Автоматизация и умные чат-системы.</p>
             </div>
 
         </div>
     </section>
 
-    <section id="contact" class="py-60 text-center">
+    <section id="contact" class="py-40 text-center">
         <div data-aos="zoom-in">
-            <a href="mailto:hello@mikhail.ru" class="serif text-5xl md:text-[8vw] hover:italic transition-all duration-700 text-white">hello@mikhail.com</a>
-            <p class="mt-10 uppercase text-[10px] tracking-[0.6em] text-gray-600">Начнем ваш проект сегодня</p>
+            <p class="uppercase text-[10px] tracking-[0.5em] mb-10 font-bold text-gray-600">Напишите нам</p>
+            <a href="mailto:hello@mikhail.com" class="serif text-4xl md:text-[6vw] hover:italic transition-all">hello@mikhail.com</a>
         </div>
     </section>
 
