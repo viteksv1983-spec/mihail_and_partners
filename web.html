@@ -15,24 +15,23 @@
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
         .serif { font-family: 'Playfair Display', serif; }
         
+        /* Заполнение пустоты: фоновый текст */
+        .bg-text { position: absolute; font-size: 20vw; font-weight: 900; opacity: 0.02; z-index: 0; pointer-events: none; white-space: nowrap; font-family: 'Inter', sans-serif; text-transform: uppercase; }
+        
         .glass-card { 
             background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.07); 
             backdrop-filter: blur(20px); transition: all 0.7s cubic-bezier(0.15, 1, 0.3, 1);
         }
-        .hero-title { font-size: clamp(2.8rem, 11vw, 8rem); line-height: 0.95; letter-spacing: -0.04em; }
-        .logo-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
-        .logo-ampersand { background: linear-gradient(135deg, #60a5fa, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-card:hover { border-color: rgba(255, 255, 255, 0.3); transform: translateY(-12px); }
         
-        .tech-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 0.5rem 1.5rem; border-radius: 99px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+        .hero-title { font-size: clamp(3rem, 12vw, 10rem); line-height: 0.85; letter-spacing: -0.05em; }
         
-        /* Мобильные правки */
-        @media (max-width: 768px) {
-            .hero-title { margin-bottom: 2rem !important; }
-            nav { padding-top: 1.25rem !important; padding-bottom: 1.25rem !important; }
-        }
+        .tech-badge { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 0.75rem 2rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
+        .tech-badge:hover { background: #3b82f6; border-color: #3b82f6; }
 
         #menu-overlay { clip-path: circle(0% at 95% 5%); transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); pointer-events: none; }
         #menu-overlay.active { clip-path: circle(150% at 95% 5%); pointer-events: auto; }
+        
         .magnetic { transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); display: inline-block; }
     </style>
 </head>
@@ -40,94 +39,92 @@
 
     <nav class="fixed w-full z-[100] py-6 px-6 md:px-16 flex justify-between items-center bg-black/10 backdrop-blur-md border-b border-white/5">
         <a href="index.html" class="flex items-center group">
-            <div class="logo-box w-11 h-11 flex justify-center items-center rounded-xl mr-4"><span class="serif italic text-2xl logo-ampersand">&</span></div>
+            <div class="w-11 h-11 flex justify-center items-center rounded-xl mr-4 border border-white/10 glass-card">
+                <span class="serif italic text-2xl bg-gradient-to-br from-blue-400 to-purple-500 bg-clip-text text-transparent">&</span>
+            </div>
             <div class="flex flex-col leading-none">
-                <span class="font-black uppercase text-base md:text-lg tracking-tighter text-white">Mikhail</span>
-                <span class="text-[8px] md:text-[9px] uppercase tracking-[0.35em] text-gray-500 font-bold mt-1.5">And Company</span>
+                <span class="font-black uppercase text-lg tracking-tighter text-white">Mikhail</span>
+                <span class="text-[9px] uppercase tracking-[0.35em] text-gray-500 font-bold mt-1.5">And Company</span>
             </div>
         </a>
         <button id="menu-open" class="group flex items-center space-x-4 outline-none magnetic relative z-[102]">
             <span class="text-[10px] uppercase tracking-[0.4em] font-bold group-hover:text-gray-400 transition">Меню</span>
-            <div class="space-y-1.5"><div class="w-8 h-0.5 bg-white transition-all"></div><div class="w-8 h-0.5 bg-white transition-all"></div></div>
+            <div class="space-y-1.5"><div class="w-8 h-0.5 bg-white"></div><div class="w-8 h-0.5 bg-white"></div></div>
         </button>
     </nav>
 
-    <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center text-white">
-        <button id="menu-close" class="absolute top-10 right-10 text-5xl font-light hover:rotate-90 transition-all duration-500">&times;</button>
-        <div class="flex flex-col space-y-10 text-center">
-            <a href="index.html" class="serif text-6xl md:text-8xl hover:italic transition-all">Главная</a>
-            <a href="index.html#work" class="serif text-6xl md:text-8xl hover:italic transition-all">Услуги</a>
-            <a href="index.html#contact" class="serif text-6xl md:text-8xl hover:italic transition-all">Связь</a>
-        </div>
-    </div>
-
-    <section class="min-h-[80vh] flex flex-col justify-center px-6 md:px-16 pt-32 pb-20 relative overflow-hidden">
-        <div class="max-w-5xl" data-aos="fade-up">
-            <span class="text-blue-500 uppercase tracking-[0.5em] text-[10px] font-bold mb-6 block">Направление 01</span>
-            <h1 class="serif hero-title mb-10 text-white">Веб-дизайн <br>& Инжиниринг</h1>
-            <p class="max-w-2xl text-lg md:text-xl text-gray-500 font-light italic leading-relaxed">
-                Мы создаем архитектуру для вашего бизнеса. От высококонверсионных интернет-магазинов до сложных интерфейсов.
+    <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-32 relative overflow-hidden">
+        <div class="bg-text top-1/4 -left-20">DEVELOPMENT</div>
+        <div class="relative z-10" data-aos="fade-up">
+            <span class="text-blue-500 uppercase tracking-[0.5em] text-[10px] font-bold mb-8 block italic">High-End Web Engineering</span>
+            <h1 class="serif hero-title mb-12 text-white">Веб-дизайн <br> & <span class="text-gray-500">Инжиниринг.</span></h1>
+            <p class="max-w-2xl text-xl md:text-2xl text-gray-500 font-light italic leading-snug">
+                Мы создаем архитектуру для бизнеса. От сложных магазинов до интерфейсов, которые задают тренды на рынке.
             </p>
         </div>
     </section>
 
-    <section class="py-12 px-6 md:px-16 border-y border-white/5 bg-[#080808]">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-start gap-4" data-aos="fade-up">
-            <div class="tech-badge">Next.js</div>
-            <div class="tech-badge">React</div>
-            <div class="tech-badge">E-commerce</div>
-            <div class="tech-badge">UX/UI Design</div>
-            <div class="tech-badge">SEO Optimization</div>
-            <div class="tech-badge">Tailwind CSS</div>
-        </div>
-    </section>
-
-    <section class="py-40 px-6 md:px-16 relative z-10">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div class="glass-card p-4 rounded-[3rem]" data-aos="zoom-in">
-                <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="w-full h-[500px] object-cover rounded-[2.5rem] grayscale hover:grayscale-0 transition duration-700" alt="NSW Project">
+    <section class="py-40 px-6 md:px-16 bg-[#080808] border-y border-white/5 relative overflow-hidden">
+        <div class="bg-text -bottom-20 -right-20">EXPERTISE</div>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div data-aos="fade-right">
+                <h2 class="serif text-5xl md:text-7xl italic mb-10 text-white">Технологическое <br> превосходство</h2>
+                <div class="flex flex-wrap gap-4">
+                    <div class="tech-badge">Next.js</div>
+                    <div class="tech-badge">React</div>
+                    <div class="tech-badge">Tailwind</div>
+                    <div class="tech-badge">Python</div>
+                    <div class="tech-badge">E-commerce</div>
+                    <div class="tech-badge">SEO Pro</div>
+                </div>
             </div>
-            <div data-aos="fade-left">
-                <span class="text-xs uppercase tracking-[0.4em] text-gray-600 mb-4 block">Избранный кейс</span>
-                <h2 class="serif text-5xl md:text-7xl italic mb-8 text-white">Nike Sneaker Warehouse</h2>
-                <p class="text-lg text-gray-400 mb-8 font-light leading-relaxed">
-                    Разработка и запуск платформы nsw.com.ua. Мы создали быстрый и интуитивно понятный интерфейс для ведущего поставщика Nike в Украине.
-                </p>
-                <ul class="space-y-4 mb-10 text-sm text-gray-500 italic">
-                    <li class="flex items-center space-x-3"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div><span>Полная SEO-оптимизация под рынок Украины.</span></li>
-                    <li class="flex items-center space-x-3"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div><span>Высокая скорость загрузки на мобильных устройствах.</span></li>
-                    <li class="flex items-center space-x-3"><div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div><span>Интеграция систем оплаты и учета остатков.</span></li>
-                </ul>
-                <a href="https://nsw.com.ua/" target="_blank" class="inline-block text-blue-500 uppercase tracking-[0.4em] text-[10px] font-bold border-b border-blue-500/30 pb-2 hover:border-blue-500 transition-all">Посетить сайт →</a>
+            <div class="space-y-12" data-aos="fade-left">
+                <div class="border-l-2 border-blue-500 pl-8">
+                    <h4 class="text-xl font-bold uppercase mb-2">Производительность</h4>
+                    <p class="text-gray-500 text-sm italic">Мы оптимизируем каждый байт. Скорость загрузки — это не роскошь, а фундамент ваших продаж.</p>
+                </div>
+                <div class="border-l-2 border-purple-500 pl-8">
+                    <h4 class="text-xl font-bold uppercase mb-2">Адаптивность</h4>
+                    <p class="text-gray-500 text-sm italic">Ваш проект будет выглядеть безупречно на любом устройстве: от Apple Watch до 8K мониторов.</p>
+                </div>
             </div>
         </div>
     </section>
 
     
 
-    <section class="py-40 px-6 md:px-16 bg-[#080808] border-t border-white/5">
+    <section class="py-40 px-6 md:px-16 relative z-10">
         <div class="max-w-7xl mx-auto">
-            <h2 class="serif text-5xl md:text-7xl italic mb-20 text-center text-white">Наш метод</h2>
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="glass-card p-10 rounded-[2.5rem]" data-aos="fade-up">
-                    <h4 class="text-xl font-bold uppercase mb-4 text-white">01. Стратегия</h4>
-                    <p class="text-sm text-gray-500 font-light leading-relaxed italic">Мы анализируем вашу нишу и конкурентов, чтобы создать продукт, который выделяется и приносит прибыль.</p>
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div class="glass-card p-4 rounded-[3rem]" data-aos="zoom-in">
+                    <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="w-full h-[600px] object-cover rounded-[2.5rem] grayscale hover:grayscale-0 transition duration-1000" alt="NSW Project">
                 </div>
-                <div class="glass-card p-10 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="200">
-                    <h4 class="text-xl font-bold uppercase mb-4 text-white">02. Прототип</h4>
-                    <p class="text-sm text-gray-500 font-light leading-relaxed italic">Создаем интерактивную структуру будущего сайта, проверяя каждый сценарий поведения пользователя.</p>
-                </div>
-                <div class="glass-card p-10 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="400">
-                    <h4 class="text-xl font-bold uppercase mb-4 text-white">03. Запуск</h4>
-                    <p class="text-sm text-gray-500 font-light leading-relaxed italic">Финальная полировка кода, настройка серверов и обучение вашей команды работе с платформой.</p>
+                <div data-aos="fade-left">
+                    <span class="text-xs uppercase tracking-[0.4em] text-gray-600 mb-6 block">Реализованный проект</span>
+                    <h2 class="serif text-6xl md:text-8xl italic mb-10 text-white leading-none">NSW <br> Warehouse</h2>
+                    <p class="text-xl text-gray-400 mb-10 font-light leading-relaxed">
+                        Разработка современной платформы nsw.com.ua. Мы создали быстрый интерфейс для ведущего поставщика Nike в Украине.
+                    </p>
+                    <div class="grid grid-cols-2 gap-8 mb-12">
+                        <div>
+                            <div class="text-3xl font-bold text-blue-500">1000+</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-600 mt-2">Активных клиентов</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-purple-500">SEO</div>
+                            <div class="text-[10px] uppercase tracking-widest text-gray-600 mt-2">Топ выдачи в Украине</div>
+                        </div>
+                    </div>
+                    <a href="https://nsw.com.ua/" target="_blank" class="magnetic text-blue-500 uppercase tracking-[0.5em] text-[10px] font-bold border-b border-blue-500/30 pb-2 hover:border-blue-500 transition-all">Открыть проект →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-40 text-center px-6">
-        <div data-aos="zoom-in">
-            <h2 class="serif text-5xl md:text-8xl mb-12 italic text-white">Нужен результат?</h2>
+    <footer class="py-40 text-center border-t border-white/5 px-6 relative overflow-hidden">
+        <div class="bg-text -top-10 left-1/2 -translate-x-1/2">CONNECT</div>
+        <div data-aos="zoom-in" class="relative z-10">
+            <h2 class="serif text-6xl md:text-9xl mb-12 italic text-white leading-none">Создадим <br> будущее?</h2>
             <a href="index.html#contact" class="text-xl uppercase tracking-[0.5em] text-blue-500 border-b border-blue-500 pb-2 magnetic">Обсудить проект</a>
         </div>
         <div class="mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-[0.4em] text-gray-700 gap-8">
@@ -146,10 +143,6 @@
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
         AOS.init({ duration: 1000, once: false });
-
-        const menuBtn = document.getElementById('menu-open'), closeBtn = document.getElementById('menu-close'), overlay = document.getElementById('menu-overlay');
-        menuBtn.addEventListener('click', () => overlay.classList.add('active'));
-        closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
 
         function updateTime() {
             const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
