@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart AI Bots | Mikhail & Company</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        html.lenis { height: auto; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); }
+        
+        /* Эффект сканирования (AI style) */
+        .scan-line { width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #10b981, transparent); position: absolute; top: 0; animation: scan 3s linear infinite; }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
+        .tech-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 0.5rem 1.5rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
+        .tech-badge:hover { background: #10b981; border-color: #10b981; color: #fff; transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 py-6 px-6 md:px-16 flex justify-between items-center bg-black/20 backdrop-blur-md border-b border-white/5">
+        <a href="index.html" class="flex items-center group">
+            <div class="w-10 h-10 flex justify-center items-center rounded-xl mr-4 border border-white/10 glass">
+                <span class="serif italic text-xl text-emerald-400">&</span>
+            </div>
+            <span class="text-[10px] uppercase tracking-[0.4em] font-bold">Back to Home</span>
+        </a>
+    </nav>
+
+    <section class="min-h-[80vh] flex flex-col justify-center items-center text-center px-6 pt-20">
+        <div data-aos="fade-up">
+            <span class="text-emerald-500 uppercase tracking-[0.5em] text-[10px] font-bold mb-6 block">Service 04</span>
+            <h1 class="serif text-6xl md:text-9xl italic mb-10 leading-none">Smart AI <br>Systems</h1>
+            <p class="max-w-2xl mx-auto text-gray-500 text-lg md:text-xl font-light leading-relaxed">
+                Интеллектуальные чат-боты на базе LLM-моделей. Автоматизация поддержки, продаж и бизнес-процессов 24/7.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 md:px-16 border-y border-white/5 bg-[#080808]">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-center gap-4" data-aos="fade-up">
+            <div class="tech-badge">OpenAI GPT-4</div>
+            <div class="tech-badge">Anthropic Claude</div>
+            <div class="tech-badge">Python / LangChain</div>
+            <div class="tech-badge">NLP / NLU</div>
+            <div class="tech-badge">Vector DB</div>
+            <div class="tech-badge">CRM Integrations</div>
+        </div>
+    </section>
+
+    <section class="py-40 px-6 md:px-16">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="glass p-10 rounded-[2.5rem] relative overflow-hidden group" data-aos="fade-up">
+                <div class="scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <h3 class="text-2xl font-bold mb-6 uppercase tracking-tighter">AI Support</h3>
+                <p class="text-gray-500 text-sm leading-relaxed italic">Бот обучается на вашей базе знаний и отвечает клиентам мгновенно, не отличимо от человека.</p>
+            </div>
+            <div class="glass p-10 rounded-[2.5rem] relative overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                <div class="scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <h3 class="text-2xl font-bold mb-6 uppercase tracking-tighter">Sales Automation</h3>
+                <p class="text-gray-500 text-sm leading-relaxed italic">Квалификация лидов, запись на услуги и прием платежей прямо в интерфейсе чата.</p>
+            </div>
+            <div class="glass p-10 rounded-[2.5rem] relative overflow-hidden group" data-aos="fade-up" data-aos-delay="400">
+                <div class="scan-line opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <h3 class="text-2xl font-bold mb-6 uppercase tracking-tighter">CRM Sync</h3>
+                <p class="text-gray-500 text-sm leading-relaxed italic">Полная интеграция с AmoCRM, Bitrix24 или вашими внутренними системами учета.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-40 px-6 bg-[#030303]">
+        <div class="max-w-5xl mx-auto flex flex-col items-center" data-aos="zoom-in">
+            <h2 class="serif text-5xl md:text-7xl mb-16 italic text-center">Thinking <br> Architecture</h2>
+            <div class="flex flex-col md:flex-row items-center justify-between w-full gap-8">
+                <div class="glass p-6 rounded-2xl border-emerald-500/30">User Input</div>
+                <div class="hidden md:block w-20 h-[1px] bg-emerald-500"></div>
+                <div class="glass p-8 rounded-full border-emerald-500 bg-emerald-500/10 font-bold">AI CORE</div>
+                <div class="hidden md:block w-20 h-[1px] bg-emerald-500"></div>
+                <div class="glass p-6 rounded-2xl border-emerald-500/30">Action / Result</div>
+            </div>
+            <p class="mt-16 text-gray-500 max-w-xl text-center text-sm italic">Наши системы анализируют контекст, а не просто ищут совпадения по словам.</p>
+        </div>
+    </section>
+
+    <section class="py-40 px-6 md:px-16">
+        <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            <div class="glass p-4 rounded-[2.5rem]" data-aos="fade-up">
+                <img src="shubham-dhage-O1rxducLjN0-unsplash.jpg" class="w-full h-[400px] object-cover rounded-[2rem] mb-8">
+                <div class="px-4 pb-4">
+                    <h4 class="text-2xl font-bold uppercase tracking-widest">Real Estate Assistant</h4>
+                    <p class="text-gray-500 text-xs mt-2 uppercase tracking-widest italic">Подбор недвижимости и ответы на вопросы по ЖК.</p>
+                </div>
+            </div>
+            <div class="glass p-4 rounded-[2.5rem]" data-aos="fade-up" data-aos-delay="200">
+                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="w-full h-[400px] object-cover rounded-[2rem] mb-8">
+                <div class="px-4 pb-4">
+                    <h4 class="text-2xl font-bold uppercase tracking-widest">Legal AI Advisor</h4>
+                    <p class="text-gray-500 text-xs mt-2 uppercase tracking-widest italic">Анализ договоров и консультация по юридическим вопросам.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-40 text-center border-t border-white/5 px-6">
+        <div data-aos="zoom-in">
+            <h2 class="serif text-5xl md:text-8xl mb-12 italic">Upgrade your workflow</h2>
+            <a href="mailto:hello@mikhail.com" class="text-xl uppercase tracking-[0.5em] text-emerald-500 border-b border-emerald-500 pb-2">Deploy AI now</a>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        const lenis = new Lenis();
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        AOS.init({ duration: 1000 });
+    </script>
+</body>
+</html>
