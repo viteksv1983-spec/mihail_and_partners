@@ -91,3 +91,46 @@
     </script>
 </body>
 </html>
+<script>
+const BOT_TOKEN = 'ТВОЙ_ТОКЕН_БОТА';
+const CHAT_ID = 'ТВОЙ_CHAT_ID';
+
+document.getElementById('tg-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const status = document.getElementById('form-status');
+    const name = this.name.value;
+    const contact = this.contact.value;
+    const message = this.message.value;
+    
+    const text = `🚀 Новая заявка Mikhail & Co!\n\n👤 Имя: ${name}\n📱 Контакт: ${contact}\n📝 Сообщение: ${message}`;
+    
+    status.classList.remove('hidden');
+    status.textContent = 'Sending...';
+    status.className = 'text-center text-xs mt-4 text-gray-400';
+
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            status.textContent = '✅ Success! We will contact you soon.';
+            status.className = 'text-center text-xs mt-4 text-emerald-500';
+            this.reset();
+        } else {
+            status.textContent = '❌ Error. Please try again.';
+            status.className = 'text-center text-xs mt-4 text-red-500';
+        }
+    })
+    .catch(() => {
+        status.textContent = '❌ Connection error.';
+        status.className = 'text-center text-xs mt-4 text-red-500';
+    });
+});
+</script>
+
