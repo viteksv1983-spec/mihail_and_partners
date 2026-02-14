@@ -22,5 +22,29 @@
         Делаем <br> <span class="text-gray-300 italic">смелый</span> <br> дизайн.
     </h1>
     <p class="max-w-md text-xl text-gray-500 italic">Независимое бюро. Киев — 2026</p>
+    <div id="custom-cursor" class="fixed top-0 left-0 w-6 h-6 bg-black rounded-full pointer-events-none z-[9999] mix-blend-difference transition-transform duration-100 ease-out hidden md:block"></div>
+
+<script>
+    const cursor = document.getElementById('custom-cursor');
+    
+    // Движение курсора
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.transform = `translate(${e.clientX - 12}px, ${e.clientY - 12}px)`;
+    });
+
+    // Эффект при наведении на ссылки и кнопки
+    const links = document.querySelectorAll('a, button, .group');
+    links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            cursor.style.transform += ' scale(3)';
+            cursor.style.backgroundColor = 'rgba(255,255,255,0.5)';
+        });
+        link.addEventListener('mouseleave', () => {
+            cursor.style.transform = cursor.style.transform.replace(' scale(3)', '');
+            cursor.style.backgroundColor = 'black';
+        });
+    });
+</script>
 </body>
 </html>
+
