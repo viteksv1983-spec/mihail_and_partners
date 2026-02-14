@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini Apps | Mikhail & Company</title>
+    <title>Telegram Mini Apps | Михаил и партнеры</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
@@ -14,120 +14,134 @@
         .lenis-smooth { scroll-behavior: auto !important; }
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
         .serif { font-family: 'Playfair Display', serif; }
-        
+
+        .noise {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none; opacity: 0.03;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+        }
+
         .bg-text { position: absolute; font-size: 20vw; font-weight: 900; opacity: 0.02; z-index: 0; pointer-events: none; white-space: nowrap; text-transform: uppercase; }
         
+        /* Свечение Telegram */
+        .tg-glow { position: absolute; top: 20%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(36, 161, 222, 0.1) 0%, transparent 70%); z-index: 0; }
+
+        #menu-overlay { 
+            position: fixed; inset: 0; background: #0a0a0a; z-index: 200;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            clip-path: circle(0% at 95% 5%); 
+            transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); 
+            visibility: hidden; pointer-events: none;
+        }
+        #menu-overlay.active { clip-path: circle(150% at 95% 5%); visibility: visible; pointer-events: auto; }
+
         .glass-card { 
             background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.07); 
             backdrop-filter: blur(20px); transition: all 0.7s cubic-bezier(0.15, 1, 0.3, 1);
         }
-        .glass-card:hover { border-color: rgba(255, 255, 255, 0.3); transform: translateY(-12px); }
-        
         .hero-title { font-size: clamp(3rem, 11vw, 9rem); line-height: 0.85; letter-spacing: -0.05em; }
         
-        .tech-badge { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); padding: 0.75rem 2rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #60a5fa; }
-        
-        #menu-overlay { clip-path: circle(0% at 95% 5%); transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); pointer-events: none; }
-        #menu-overlay.active { clip-path: circle(150% at 95% 5%); pointer-events: auto; }
+        .tech-badge { background: rgba(36, 161, 222, 0.1); border: 1px solid rgba(36, 161, 222, 0.2); padding: 0.6rem 1.5rem; border-radius: 99px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: #24a1de; }
         
         .magnetic { transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1); display: inline-block; }
-        
-        /* Эффект свечения Telegram */
-        .tg-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(36, 161, 222, 0.15) 0%, transparent 70%); z-index: 0; }
+        body.menu-open { overflow: hidden; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed w-full z-[100] py-6 px-6 md:px-16 flex justify-between items-center bg-black/10 backdrop-blur-md border-b border-white/5">
-        <a href="index.html" class="flex items-center group">
-            <div class="w-11 h-11 flex justify-center items-center rounded-xl mr-4 border border-white/10 glass-card">
-                <span class="serif italic text-2xl bg-gradient-to-br from-blue-400 to-cyan-500 bg-clip-text text-transparent">&</span>
+    <div class="noise"></div>
+
+    <nav class="fixed w-full z-[150] py-6 px-6 md:px-16 flex justify-between items-center bg-black/10 backdrop-blur-md border-b border-white/5">
+        <a href="index.html" class="flex items-center group relative z-[151]">
+            <div class="w-10 h-10 flex justify-center items-center rounded-xl mr-4 border border-white/10 bg-white/5">
+                <span class="serif italic text-2xl text-blue-400">&</span>
             </div>
             <div class="flex flex-col leading-none">
-                <span class="font-black uppercase text-lg tracking-tighter text-white">Mikhail</span>
-                <span class="text-[9px] uppercase tracking-[0.35em] text-gray-500 font-bold mt-1.5">And Company</span>
+                <span class="font-black uppercase text-lg tracking-tighter">Михаил</span>
+                <span class="text-[8px] uppercase tracking-[0.4em] text-gray-500 font-bold mt-1.5">И партнеры</span>
             </div>
         </a>
-        <button id="menu-open" class="group flex items-center space-x-4 outline-none magnetic relative z-[102]">
-            <span class="text-[10px] uppercase tracking-[0.4em] font-bold group-hover:text-gray-400 transition">Меню</span>
-            <div class="space-y-1.5"><div class="w-8 h-0.5 bg-white"></div><div class="w-8 h-0.5 bg-white"></div></div>
+        <button id="menu-open" class="group flex items-center space-x-4 outline-none relative z-[151] p-2 magnetic">
+            <span class="text-[10px] uppercase tracking-[0.5em] font-bold hidden md:block">Меню</span>
+            <div class="space-y-1.5"><div class="w-8 h-0.5 bg-white transition-all group-hover:w-6"></div><div class="w-8 h-0.5 bg-white"></div></div>
         </button>
     </nav>
 
-    <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center text-white">
-        <button id="menu-close" class="absolute top-10 right-10 text-5xl font-light hover:rotate-90 transition-all duration-500">&times;</button>
-        <div class="flex flex-col space-y-10 text-center">
-            <a href="index.html" class="serif text-6xl md:text-8xl hover:italic transition-all">Главная</a>
-            <a href="web.html" class="serif text-6xl md:text-8xl hover:italic transition-all">Веб-дизайн</a>
-            <a href="index.html#contact" class="serif text-6xl md:text-8xl hover:italic transition-all">Связь</a>
+    <div id="menu-overlay">
+        <button id="menu-close" class="absolute top-8 right-8 text-5xl font-light p-4">&times;</button>
+        <div class="flex flex-col space-y-8 md:space-y-12 text-center">
+            <a href="index.html" class="menu-link serif text-5xl md:text-9xl hover:italic transition-all">Главная</a>
+            <a href="web.html" class="menu-link serif text-5xl md:text-9xl hover:italic transition-all">Веб-дизайн</a>
+            <a href="mobile.html" class="menu-link serif text-5xl md:text-9xl hover:italic transition-all">Мобильность</a>
+            <a href="bots.html" class="menu-link serif text-5xl md:text-9xl hover:italic transition-all">AI Боты</a>
         </div>
     </div>
 
-    <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-32 relative overflow-hidden">
+    <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 relative overflow-hidden pt-32 pb-12">
         <div class="tg-glow"></div>
-        <div class="bg-text top-1/4 -right-20">TELEGRAM</div>
+        <div class="bg-text top-1/4 -right-10">APP CENTER</div>
         <div class="relative z-10" data-aos="fade-up">
-            <span class="text-blue-400 uppercase tracking-[0.5em] text-[10px] font-bold mb-8 block italic">The Future of Apps</span>
-            <h1 class="serif hero-title mb-12 text-white">Telegram <br> <span class="text-gray-500">Mini Apps.</span></h1>
+            <span class="text-blue-400 uppercase tracking-[0.5em] text-[10px] font-bold mb-8 block italic">Web3 Ecosystems</span>
+            <h1 class="serif hero-title mb-12">Telegram <br> <span class="text-gray-500">Mini Apps.</span></h1>
             <p class="max-w-2xl text-xl md:text-2xl text-gray-400 font-light italic leading-snug">
                 Мы превращаем мессенджер в мощную торговую платформу. Полноценные приложения, которые открываются мгновенно и работают без установки.
             </p>
         </div>
     </section>
 
-    <section class="py-40 px-6 md:px-16 bg-[#080808] border-y border-white/5 relative overflow-hidden">
-        <div class="bg-text -bottom-10 -left-10">ECOSYSTEM</div>
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 relative z-10">
+    <section class="py-20 md:py-40 px-6 md:px-16 bg-[#080808] border-y border-white/5 relative overflow-hidden">
+        <div class="bg-text -bottom-10 -left-10">ЭКОСИСТЕМА</div>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 relative z-10">
             <div class="glass-card p-10 rounded-[3rem]" data-aos="fade-up">
-                <h3 class="text-2xl font-bold uppercase mb-6 text-white">Native UX</h3>
-                <p class="text-gray-500 text-sm leading-relaxed italic">Пользователь не покидает Telegram. Это повышает конверсию в покупку в 3-4 раза по сравнению с обычным сайтом.</p>
+                <h3 class="text-2xl font-bold uppercase mb-6 leading-none">Конверсия</h3>
+                <p class="text-gray-500 text-sm italic leading-relaxed">Покупка внутри Telegram происходит в 3 раза быстрее, чем на сайте. Без лишних регистраций и переходов.</p>
+            </div>
+            <div class="glass-card p-10 rounded-[3rem]" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-2xl font-bold uppercase mb-6 leading-none">Платежи</h3>
+                <p class="text-gray-500 text-sm italic leading-relaxed">Бесшовная интеграция с Telegram Pay, картами и крипто-платежами через сеть TON.</p>
             </div>
             <div class="glass-card p-10 rounded-[3rem]" data-aos="fade-up" data-aos-delay="200">
-                <h3 class="text-2xl font-bold uppercase mb-6 text-white">Payments</h3>
-                <p class="text-gray-500 text-sm leading-relaxed italic">Полная интеграция с Telegram Pay, Apple Pay и крипто-платежами через TON Wallet.</p>
-            </div>
-            <div class="glass-card p-10 rounded-[3rem]" data-aos="fade-up" data-aos-delay="400">
-                <h3 class="text-2xl font-bold uppercase mb-6 text-white">Retention</h3>
-                <p class="text-gray-500 text-sm leading-relaxed italic">Push-уведомления и мгновенный доступ через меню бота возвращают клиентов снова и снова.</p>
+                <h3 class="text-2xl font-bold uppercase mb-6 leading-none">Лояльность</h3>
+                <p class="text-gray-500 text-sm italic leading-relaxed">Push-уведомления о новых дропах кроссовок NSW приходят напрямую на экран клиента.</p>
             </div>
         </div>
     </section>
 
     
 
-    <section class="py-40 px-6 md:px-16 relative z-10">
+    <section class="py-20 md:py-40 px-6 md:px-16 relative z-10">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
             <div data-aos="fade-right">
-                <span class="text-xs uppercase tracking-[0.4em] text-gray-600 mb-6 block font-bold italic">E-commerce Innovation</span>
-                <h2 class="serif text-6xl md:text-8xl italic mb-10 text-white leading-none">NSW <br> Store App</h2>
-                <p class="text-xl text-gray-400 mb-10 font-light leading-relaxed">
-                    Мы интегрируем ваш каталог NSW напрямую в Telegram. Теперь ваши клиенты могут выбирать лимитированные Nike и оформлять доставку, не закрывая чат.
+                <span class="text-xs uppercase tracking-[0.4em] text-gray-600 mb-6 block font-bold italic">Флагманский проект</span>
+                <h2 class="serif text-5xl md:text-8xl italic mb-10 leading-none">NSW <br> Store App</h2>
+                <p class="text-xl text-gray-400 mb-10 font-light leading-relaxed italic">
+                    Для магазина nsw.com.ua мы разработали Mini App, который объединяет каталог кроссовок Nike и систему автоматизированных продаж внутри мессенджера.
                 </p>
                 <div class="flex flex-wrap gap-4 mb-12">
                     <div class="tech-badge">React</div>
-                    <div class="tech-badge">TMA API</div>
-                    <div class="tech-badge">TON Integration</div>
+                    <div class="tech-badge">Telegram API</div>
+                    <div class="tech-badge">TON</div>
                 </div>
-                <a href="index.html#contact" class="magnetic text-blue-400 uppercase tracking-[0.5em] text-[10px] font-bold border-b border-blue-400/30 pb-2 hover:border-blue-400 transition-all">Заказать разработку →</a>
+                <a href="index.html#contact" class="magnetic text-blue-400 uppercase tracking-[0.5em] text-[10px] font-bold border-b border-blue-400/30 pb-2 hover:border-blue-400 transition-all">Обсудить ваш App →</a>
             </div>
             <div class="glass-card p-4 rounded-[4rem] relative overflow-hidden" data-aos="zoom-in">
-                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="w-full h-[650px] object-cover rounded-[3.5rem] grayscale hover:grayscale-0 transition duration-1000" alt="TMA Mockup">
+                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="w-full h-[600px] object-cover rounded-[3.5rem] grayscale hover:grayscale-0 transition duration-1000" alt="TMA Showcase">
             </div>
         </div>
     </section>
 
     <footer class="py-40 text-center border-t border-white/5 px-6 relative overflow-hidden">
-        <div class="bg-text -top-10 left-1/2 -translate-x-1/2">READY</div>
+        <div class="bg-text -top-10 left-1/2 -translate-x-1/2">СТАРТ</div>
         <div data-aos="zoom-in" class="relative z-10">
-            <h2 class="serif text-5xl md:text-9xl mb-12 italic text-white leading-none">Запустим <br> ваш Mini App?</h2>
-            <a href="index.html#contact" class="text-xl uppercase tracking-[0.5em] text-blue-400 border-b border-blue-400 pb-2 magnetic">Начать проект</a>
+            <h2 class="serif text-5xl md:text-[8rem] italic leading-none">Запустим <br> ваш Mini App?</h2>
+            <a href="index.html#contact" class="text-xl uppercase tracking-[0.5em] text-blue-400 border-b border-blue-400 pb-2 magnetic">Связаться</a>
         </div>
         
-        <div class="mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-[0.4em] text-gray-700 gap-8">
-            <div>© 2026 Mikhail & Company</div>
+        <div class="mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-[0.5em] text-gray-700 gap-8">
+            <div>© 2026 Михаил и партнеры</div>
             <div class="flex gap-12">
-                <div class="flex flex-col items-center"><span class="text-gray-500 mb-1 text-[8px]">Киев</span><span id="time-kyiv" class="text-white font-bold tracking-widest text-[11px]">00:00:00</span></div>
-                <div class="flex flex-col items-center"><span class="text-gray-500 mb-1 text-[8px]">Варшава</span><span id="time-warsaw" class="text-white font-bold tracking-widest text-[11px]">00:00:00</span></div>
+                <div class="flex flex-col items-center"><span class="text-gray-500 mb-1">Киев</span><span id="time-kyiv" class="text-white font-bold tracking-widest text-xs">--:--:--</span></div>
+                <div class="flex flex-col items-center"><span class="text-gray-500 mb-1">Варшава</span><span id="time-warsaw" class="text-white font-bold tracking-widest text-xs">--:--:--</span></div>
             </div>
         </div>
     </footer>
@@ -138,11 +152,18 @@
         const lenis = new Lenis();
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
-        AOS.init({ duration: 1000, once: false });
+        AOS.init({ duration: 1200, once: false });
 
-        const menuBtn = document.getElementById('menu-open'), closeBtn = document.getElementById('menu-close'), overlay = document.getElementById('menu-overlay');
-        menuBtn.addEventListener('click', () => overlay.classList.add('active'));
-        closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+        const menuBtn = document.getElementById('menu-open'), closeBtn = document.getElementById('menu-close'), overlay = document.getElementById('menu-overlay'), body = document.body;
+        
+        function toggleMenu(state) {
+            overlay.classList.toggle('active', state);
+            body.classList.toggle('menu-open', state);
+        }
+
+        menuBtn.addEventListener('click', () => toggleMenu(true));
+        closeBtn.addEventListener('click', () => toggleMenu(false));
+        document.querySelectorAll('.menu-link').forEach(l => l.addEventListener('click', () => toggleMenu(false)));
 
         function updateTime() {
             const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
@@ -150,13 +171,13 @@
             document.getElementById('time-warsaw').textContent = new Intl.DateTimeFormat('ru-RU', { ...options, timeZone: 'Europe/Warsaw' }).format(new Date());
         }
         setInterval(updateTime, 1000); updateTime();
-
+        
         const magnetics = document.querySelectorAll('.magnetic');
         magnetics.forEach(el => {
             el.addEventListener('mousemove', (e) => {
                 const pos = el.getBoundingClientRect();
-                const x = (e.clientX - pos.left - pos.width / 2) * 0.3;
-                const y = (e.clientY - pos.top - pos.height / 2) * 0.3;
+                const x = (e.clientX - pos.left - pos.width / 2) * 0.4;
+                const y = (e.clientY - pos.top - pos.height / 2) * 0.4;
                 el.style.transform = `translate(${x}px, ${y}px)`;
             });
             el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0px, 0px)'; });
