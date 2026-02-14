@@ -24,8 +24,16 @@
         }
         @keyframes blob-spin { 0% { transform: rotate(0deg) scale(1); } 100% { transform: rotate(360deg) scale(1.1); } }
 
-        #menu-overlay { clip-path: circle(0% at 95% 5%); transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); }
-        #menu-overlay.active { clip-path: circle(150% at 95% 5%); }
+        /* ИСПРАВЛЕННОЕ МЕНЮ */
+        #menu-overlay { 
+            clip-path: circle(0% at 95% 5%); 
+            transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1); 
+            pointer-events: none; /* Чтобы не блокировало кнопки, когда закрыто */
+        }
+        #menu-overlay.active { 
+            clip-path: circle(150% at 95% 5%); 
+            pointer-events: auto; /* Включаем клики, когда открыто */
+        }
 
         .glass-card { 
             background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.07); 
@@ -56,19 +64,22 @@
                 <span class="text-[9px] uppercase tracking-[0.35em] text-gray-500 font-bold mt-1.5">And Company</span>
             </div>
         </a>
-        <button id="menu-open" class="group flex items-center space-x-4 outline-none magnetic">
+        <button id="menu-open" class="group flex items-center space-x-4 outline-none magnetic relative z-[102]">
             <span class="text-[10px] uppercase tracking-[0.4em] font-bold group-hover:text-gray-400 transition">Меню</span>
-            <div class="space-y-1.5"><div class="w-8 h-0.5 bg-white transition-all"></div><div class="w-8 h-0.5 bg-white transition-all"></div></div>
+            <div class="space-y-1.5">
+                <div class="w-8 h-0.5 bg-white transition-all group-hover:w-6"></div>
+                <div class="w-8 h-0.5 bg-white transition-all group-hover:w-10"></div>
+            </div>
         </button>
     </nav>
 
     <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center text-white">
-        <button id="menu-close" class="absolute top-10 right-10 text-5xl font-light">&times;</button>
+        <button id="menu-close" class="absolute top-10 right-10 text-5xl font-light hover:rotate-90 transition-all duration-500">&times;</button>
         <div class="flex flex-col space-y-10 text-center">
-            <a href="#work" class="serif text-6xl md:text-8xl hover:italic transition-all">Услуги</a>
-            <a href="#process" class="serif text-6xl md:text-8xl hover:italic transition-all">Метод</a>
-            <a href="#vision" class="serif text-6xl md:text-8xl hover:italic transition-all">Видение</a>
-            <a href="#contact" class="serif text-6xl md:text-8xl hover:italic transition-all">Связь</a>
+            <a href="#work" class="menu-link serif text-6xl md:text-8xl hover:italic transition-all">Услуги</a>
+            <a href="#process" class="menu-link serif text-6xl md:text-8xl hover:italic transition-all">Метод</a>
+            <a href="#vision" class="menu-link serif text-6xl md:text-8xl hover:italic transition-all">Видение</a>
+            <a href="#contact" class="menu-link serif text-6xl md:text-8xl hover:italic transition-all">Связь</a>
         </div>
     </div>
 
@@ -132,7 +143,7 @@
         <div class="grid md:grid-cols-3 gap-16">
             <div class="relative group" data-aos="fade-up">
                 <span class="step-number">01</span>
-                <div class="relative z-10"><h4 class="serif italic text-3xl mb-6">Стратегия</h4><p class="text-gray-500 text-sm leading-relaxed">Мы расшифровываем ДНК вашего бренда, чтобы найти точки роста.</p></div>
+                <div class="relative z-10"><h4 class="serif italic text-3xl mb-6">Стратегия</h4><p class="text-gray-500 text-sm leading-relaxed">Мы расшифровываем ДНК вашего бренда, чтобы найти уникальные точки роста.</p></div>
             </div>
             <div class="relative group" data-aos="fade-up" data-aos-delay="200">
                 <span class="step-number">02</span>
@@ -153,13 +164,10 @@
             </div>
             <div data-aos="fade-left" data-aos-delay="200">
                 <p class="text-xl md:text-2xl text-gray-400 font-light leading-relaxed mb-8">Мы верим, что технологии должны быть невидимыми, а результат — ощутимым. В мире цифрового шума мы создаем чистоту и смысл.</p>
-                <p class="text-lg text-gray-600 font-light italic leading-relaxed">Для бюро «Михаил и партнеры» каждый проект — это не просто код, это живая экосистема.</p>
+                <p class="text-lg text-gray-600 font-light italic leading-relaxed">Для бюро Mikhail & Company каждый проект — это не просто код, это живая экосистема.</p>
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
     </section>
-
-    
 
     <section id="contact" class="py-40 px-6 bg-[#050505] relative z-10 border-t border-white/5">
         <div class="max-w-4xl mx-auto" data-aos="fade-up">
@@ -195,6 +203,16 @@
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
         AOS.init({ duration: 1000, once: false });
+
+        // МЕНЮ СКРИПТ (ОБНОВЛЕННЫЙ)
+        const menuBtn = document.getElementById('menu-open');
+        const closeBtn = document.getElementById('menu-close');
+        const overlay = document.getElementById('menu-overlay');
+        const links = document.querySelectorAll('.menu-link');
+
+        menuBtn.addEventListener('click', () => overlay.classList.add('active'));
+        closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+        links.forEach(l => l.addEventListener('click', () => overlay.classList.remove('active')));
 
         function updateTime() {
             const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
