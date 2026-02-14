@@ -4,105 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Михаил и партнеры | Креативное бюро</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         html.lenis { height: auto; }
         .lenis-smooth { scroll-behavior: auto !important; }
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #fff; overflow-x: hidden; }
         .serif { font-family: 'Playfair Display', serif; }
         
+        /* Полноэкранное меню */
+        #menu-overlay {
+            clip-path: circle(0% at 95% 5%);
+            transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        #menu-overlay.active { clip-path: circle(150% at 95% 5%); }
+
         .glass-card { 
             background: rgba(255, 255, 255, 0.02); 
             border: 1px solid rgba(255, 255, 255, 0.08); 
             backdrop-filter: blur(20px);
             transition: all 0.7s cubic-bezier(0.15, 1, 0.3, 1);
-            overflow: hidden;
         }
-        .glass-card:hover { 
-            border-color: rgba(255, 255, 255, 0.3); 
-            background: rgba(255, 255, 255, 0.04);
-            transform: translateY(-10px); 
-        }
+        .glass-card:hover { border-color: rgba(255, 255, 255, 0.3); transform: translateY(-10px); }
+        
         .card-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            border-radius: 2rem;
-            transition: all 0.7s ease;
+            width: 100%; height: 400px; object-fit: cover; border-radius: 1.5rem; transition: transform 0.8s ease;
         }
-        .glass-card:hover .card-image {
-            transform: scale(1.05);
-        }
-        .hero-title { font-size: clamp(3rem, 11vw, 9rem); line-height: 0.8; letter-spacing: -0.05em; }
+        .glass-card:hover .card-image { transform: scale(1.03); }
+
+        .hero-title { font-size: clamp(3.5rem, 12vw, 10rem); line-height: 0.8; letter-spacing: -0.05em; }
+        .accent-text { color: #555; transition: color 0.3s; }
+        .accent-text:hover { color: #fff; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed w-full z-50 py-10 px-6 md:px-16 flex justify-between items-center bg-black/20 backdrop-blur-md">
+    <nav class="fixed w-full z-[100] py-8 px-6 md:px-16 flex justify-between items-center bg-black/10 backdrop-blur-md">
         <div class="text-xl font-black uppercase tracking-tighter">Михаил <span class="serif italic font-normal text-gray-500">&</span> П.</div>
-        <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.4em] font-bold opacity-50">
-            <a href="#services">Услуги</a>
-            <a href="#contact">Контакт</a>
-        </div>
+        <button id="menu-open" class="group flex items-center space-x-4 outline-none">
+            <span class="text-[10px] uppercase tracking-[0.4em] font-bold group-hover:text-gray-400">Меню</span>
+            <div class="space-y-1.5">
+                <div class="w-8 h-0.5 bg-white"></div>
+                <div class="w-8 h-0.5 bg-white"></div>
+            </div>
+        </button>
     </nav>
 
+    <div id="menu-overlay" class="fixed inset-0 bg-[#0a0a0a] z-[101] flex flex-col justify-center items-center">
+        <button id="menu-close" class="absolute top-10 right-10 text-4xl font-light">&times;</button>
+        <div class="flex flex-col space-y-8 text-center">
+            <a href="#work" class="serif text-6xl md:text-8xl hover:italic transition-all">Работы</a>
+            <a href="#process" class="serif text-6xl md:text-8xl hover:italic transition-all">Процесс</a>
+            <a href="#contact" class="serif text-6xl md:text-8xl hover:italic transition-all">Связь</a>
+        </div>
+    </div>
+
     <section class="min-h-screen flex flex-col justify-center px-6 md:px-16">
-        <div data-aos="fade-up" data-aos-duration="1500">
-            <h1 class="serif hero-title mb-16">Создаем <br> <span class="italic text-gray-500">цифровую</span> <br> эстетику.</h1>
+        <div data-aos="fade-up">
+            <h1 class="serif hero-title mb-12">Бутик <br> <span class="italic text-gray-400">цифровых</span> <br> решений.</h1>
+            <p class="max-w-xl text-xl text-gray-500 font-light leading-snug">
+                Мы объединяем опыт Михаила и экспертизу его партнеров для создания продуктов, которые задают тренды.
+            </p>
         </div>
     </section>
 
-    <section id="services" class="py-20 px-6 md:px-16">
-        <div class="grid md:grid-cols-2 gap-8">
-            
-            <div class="glass-card p-8 rounded-[3rem]" data-aos="fade-up">
-                <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="card-image mb-8" alt="Создание сайтов">
-                <h3 class="text-3xl font-bold uppercase mb-2">Создание сайтов</h3>
-                <p class="text-gray-500 text-sm italic">Премиальные веб-решения для вашего бизнеса.</p>
+    <section id="work" class="py-20 px-6 md:px-16">
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="glass-card p-6 rounded-[2rem]" data-aos="fade-up">
+                <img src="shubham-dhage-Iw3iq3wukdg-unsplash.jpg" class="card-image mb-8">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500 mb-2 block italic">01 / Web Architecture</span>
+                        <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Создание сайтов</h3>
+                    </div>
+                </div>
             </div>
 
-            <div class="glass-card p-8 rounded-[3rem]" data-aos="fade-up" data-aos-delay="200">
-                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="card-image mb-8" alt="Телеграм приложения">
-                <h3 class="text-3xl font-bold uppercase mb-2">Телеграм приложения</h3>
-                <p class="text-gray-500 text-sm italic">Mini Apps и инновации в мессенджере.</p>
+            <div class="glass-card p-6 rounded-[2rem]" data-aos="fade-up" data-aos-delay="200">
+                <img src="shubham-dhage-NPJF9xPoCHk-unsplash.jpg" class="card-image mb-8">
+                <div>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 mb-2 block italic">02 / Ecosystem</span>
+                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Telegram Apps</h3>
+                </div>
             </div>
 
-            <div class="glass-card p-8 rounded-[3rem]" data-aos="fade-up">
-                <img src="pawel-czerwinski-NJdfP9AlPjc-unsplash.jpg" class="card-image mb-8" alt="Android и iOS">
-                <h3 class="text-3xl font-bold uppercase mb-2">Android и iOS</h3>
-                <p class="text-gray-500 text-sm italic">Мобильные приложения любой сложности.</p>
+            <div class="glass-card p-6 rounded-[2rem]" data-aos="fade-up">
+                <img src="pawel-czerwinski-NJdfP9AlPjc-unsplash.jpg" class="card-image mb-8">
+                <div>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 mb-2 block italic">03 / Mobile Experience</span>
+                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Android & iOS</h3>
+                </div>
             </div>
 
-            <div class="glass-card p-8 rounded-[3rem]" data-aos="fade-up" data-aos-delay="200">
-                <img src="shubham-dhage-O1rxducLjN0-unsplash.jpg" class="card-image mb-8" alt="Боты">
-                <h3 class="text-3xl font-bold uppercase mb-2">Telegram Боты</h3>
-                <p class="text-gray-500 text-sm italic">Автоматизация и умные чат-системы.</p>
+            <div class="glass-card p-6 rounded-[2rem]" data-aos="fade-up" data-aos-delay="200">
+                <img src="shubham-dhage-O1rxducLjN0-unsplash.jpg" class="card-image mb-8">
+                <div>
+                    <span class="text-[10px] uppercase tracking-widest text-gray-500 mb-2 block italic">04 / Automation</span>
+                    <h3 class="text-4xl font-bold uppercase tracking-tighter leading-none">Умные боты</h3>
+                </div>
             </div>
-
         </div>
     </section>
 
-    <section id="contact" class="py-40 text-center">
+    <section id="process" class="py-32 px-6 md:px-16 border-t border-white/5">
+        <div class="grid md:grid-cols-3 gap-16">
+            <div data-aos="fade-right">
+                <h4 class="serif italic text-3xl mb-6">Аналитика</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Погружаемся в ваш бизнес, изучаем конкурентов и формируем стратегию роста.</p>
+            </div>
+            <div data-aos="fade-right" data-aos-delay="200">
+                <h4 class="serif italic text-3xl mb-6">Дизайн</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Создаем визуальный язык, который выделяет вас на рынке и влюбляет пользователей.</p>
+            </div>
+            <div data-aos="fade-right" data-aos-delay="400">
+                <h4 class="serif italic text-3xl mb-6">Код</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">Чистая разработка на современных стеках: React, Node.js, Python.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-60 text-center">
         <div data-aos="zoom-in">
-            <p class="uppercase text-[10px] tracking-[0.5em] mb-10 font-bold text-gray-600">Напишите нам</p>
-            <a href="mailto:hello@mikhail.com" class="serif text-4xl md:text-[6vw] hover:italic transition-all">hello@mikhail.com</a>
+            <p class="uppercase text-[10px] tracking-[0.5em] mb-12 text-gray-600 font-bold">Обсудим ваш кейс?</p>
+            <a href="mailto:hello@mikhail.ru" class="serif text-5xl md:text-[8vw] hover:italic transition-all">Напишите нам</a>
         </div>
     </section>
 
-    <footer class="py-10 border-t border-white/5 text-center text-[9px] uppercase tracking-[0.4em] text-gray-700">
-        © 2026 Михаил & Партнеры
+    <footer class="py-10 px-6 md:px-16 flex justify-between items-center border-t border-white/5 text-[9px] uppercase tracking-[0.3em] text-gray-600">
+        <div>© 2026 Михаил & Партнеры</div>
+        <div class="hidden md:block">Киев — Варшава — Мир</div>
     </footer>
 
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        const lenis = new Lenis();
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
-        AOS.init({ duration: 1000, once: false });
-        lenis.on('scroll', () => { AOS.refresh(); });
-    </script>
-</body>
-</html>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js
